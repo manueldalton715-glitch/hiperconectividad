@@ -3,7 +3,7 @@
   "short_name": "Radar",
   "description": "Guía multilingüe de hiperconectividad, seguridad e inteligencia de riesgos empresariales.",
   "lang": "es",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#faf8f3",

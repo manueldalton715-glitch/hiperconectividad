@@ -89,7 +89,7 @@ footer { background:#1a1a1a; color:#888; text-align:center; padding:3rem 2rem; f
     <div class="eyebrow">Ensaio corporativo · Edição 2026</div>
     <h1>O Radar Corporativo</h1>
     <p class="subtitle">Hiperconectividade, segurança e o novo imperativo de sobrevivência empresarial</p>
-    <a class="edition-link" href="radar-corporativo-ampliado.pt-br.html">Leia a versão ampliada</a>
+    <a class="edition-link" href="radar-corporativo-ampliado.pt-br">Leia a versão ampliada</a>
     <div class="meta">Guia de inteligência de riscos · Dever de cuidado · Realocação estratégica</div>
   </div>
 </header>
@@ -307,7 +307,7 @@ footer { background:#1a1a1a; color:#888; text-align:center; padding:3rem 2rem; f
   let currentMatch = -1;
 
   languagePicker.addEventListener("change", () => {
-    const editions = { es: "index.html", en: "index.en.html", "pt-BR": "index.pt-br.html" };
+    const editions = { es: "index", en: "index.en", "pt-BR": "index.pt-br" };
     window.location.href = editions[languagePicker.value];
   });
 

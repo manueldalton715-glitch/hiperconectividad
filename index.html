@@ -535,7 +535,7 @@
     <div class="eyebrow" data-i18n="eyebrow">Ensayo Corporativo · Edición 2026</div>
     <h1>El Radar Corporativo</h1>
     <p class="subtitle" data-i18n="subtitle">Hiperconectividad, Seguridad y el Nuevo Mandato de Supervivencia Empresarial</p>
-    <a class="edition-link" href="radar-corporativo-ampliado.html" data-i18n="extended">Leer la versión extendida</a>
+    <a class="edition-link" href="radar-corporativo-ampliado" data-i18n="extended">Leer la versión extendida</a>
     <div class="meta" data-i18n="meta">Guía para la inteligencia de riesgos · El deber de cuidado · La relocalización estratégica</div>
   </div>
 </header>
@@ -1233,7 +1233,7 @@
     }
   });
   languagePicker.addEventListener("change", () => {
-    const editions = { es: "index.html", en: "index.en.html", "pt-BR": "index.pt-br.html" };
+    const editions = { es: "index", en: "index.en", "pt-BR": "index.pt-br" };
     window.location.assign(editions[languagePicker.value]);
   });
 

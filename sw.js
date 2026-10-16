@@ -1,12 +1,11 @@
-const CACHE_NAME = "radar-corporativo-v3";
+const CACHE_NAME = "radar-corporativo-v4";
 const APP_SHELL = [
   "./",
-  "./index.html",
-  "./index.en.html",
-  "./index.pt-br.html",
-  "./radar-corporativo-ampliado.html",
-  "./radar-corporativo-ampliado.en.html",
-  "./radar-corporativo-ampliado.pt-br.html",
+  "./index.en",
+  "./index.pt-br",
+  "./radar-corporativo-ampliado",
+  "./radar-corporativo-ampliado.en",
+  "./radar-corporativo-ampliado.pt-br",
   "./manifest.webmanifest",
   "./icon.svg"
 ];
@@ -38,7 +37,7 @@ self.addEventListener("fetch", (event) => {
     caches.match(request).then((cached) => {
       if (cached) return cached;
       return fetch(request).catch(() => {
-        if (request.mode === "navigate") return caches.match("./index.html");
+        if (request.mode === "navigate") return caches.match("./");
         throw new Error(`Recurso no disponible sin conexión: ${request.url}`);
       });
     })
