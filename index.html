@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Radar Corporativo — Hiperconectividad, Seguridad y Supervivencia Empresarial</title>
+<title data-i18n="documentTitle">El Radar Corporativo — Hiperconectividad, Seguridad y Supervivencia Empresarial</title>
 <style>
   /* ===== RESET Y BASE ===== */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,6 +36,19 @@
   }
 
   html { scroll-behavior: smooth; }
+
+  .skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 200;
+    padding: 0.75rem 1rem;
+    background: var(--card);
+    color: var(--text);
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus { transform: translateY(0); }
 
   body {
     font-family: 'Georgia', 'Charter', 'Iowan Old Style', serif;
@@ -142,6 +155,39 @@
     padding: 4rem 2rem;
   }
 
+  .reader-tools {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+    display: grid;
+    grid-template-columns: minmax(12rem, 1fr) auto auto;
+    align-items: end;
+    gap: 1rem;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  .reader-tools label { display: block; margin-bottom: 0.35rem; font-size: 0.85rem; font-weight: 700; }
+  .reader-tools input, .reader-tools select, .reader-tools button {
+    min-height: 46px;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--card);
+    color: var(--text);
+    font: inherit;
+  }
+  .reader-tools input { width: 100%; }
+  .reader-tools button { cursor: pointer; }
+  .reader-tools button:hover { border-color: var(--accent); }
+  .reader-tools input:focus-visible, .reader-tools select:focus-visible, .reader-tools button:focus-visible {
+    outline: 3px solid var(--accent-2);
+    outline-offset: 2px;
+  }
+  .search-status { grid-column: 1 / -1; min-height: 1.4em; color: var(--muted); font-size: 0.85rem; }
+  .language-note { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 0.8rem; }
+  mark.search-match { background: #ffe08a; color: #1a1a1a; border-radius: 2px; }
+  mark.search-match.current { outline: 2px solid var(--accent); }
+
   .toc h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
@@ -219,6 +265,24 @@
     font-size: 0.85rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+  }
+
+  .chapter-heading-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .chapter-icon {
+    flex: 0 0 auto;
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--card);
+    font-size: 1.5rem;
   }
 
   h2.chapter-title {
@@ -353,6 +417,26 @@
     overflow: hidden;
   }
 
+  .ivr-chart {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+  }
+  .ivr-chart h4 { margin-top: 0; }
+  .ivr-chart ul { list-style: none; margin: 1rem 0 0; padding: 0; }
+  .ivr-chart li { display: grid; grid-template-columns: minmax(9rem, 1fr) 3fr 3rem; align-items: center; gap: 0.8rem; margin: 0.8rem 0; }
+  .ivr-track { height: 0.9rem; overflow: hidden; border-radius: 99px; background: var(--border); }
+  .ivr-bar { display: block; width: var(--weight); height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transform: scaleX(0); transform-origin: left; }
+  .ivr-chart.is-visible .ivr-bar { animation: grow-bar 900ms cubic-bezier(.2,.7,.2,1) forwards; }
+  .ivr-chart li:nth-child(2) .ivr-bar { animation-delay: 100ms; }
+  .ivr-chart li:nth-child(3) .ivr-bar { animation-delay: 200ms; }
+  .ivr-chart li:nth-child(4) .ivr-bar { animation-delay: 300ms; }
+  .ivr-value { font-family: Helvetica, Arial, sans-serif; font-weight: 700; text-align: right; }
+  @keyframes grow-bar { to { transform: scaleX(1); } }
+
   th {
     background: var(--accent);
     color: white;
@@ -415,57 +499,91 @@
     .cover { padding: 3rem 1.5rem; }
     blockquote { font-size: 1.1rem; }
     .back-top { width: 42px; height: 42px; bottom: 1rem; right: 1rem; }
+    .reader-tools { grid-template-columns: 1fr 1fr; padding: 0 1.2rem 1.5rem; }
+    .reader-tools .search-field { grid-column: 1 / -1; }
+    .reader-tools button { width: 100%; }
+    .chapter-icon { width: 2.5rem; height: 2.5rem; font-size: 1.25rem; }
+    table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .ivr-chart { padding: 1rem; }
+    .ivr-chart li { grid-template-columns: minmax(7rem, 1fr) 2fr 2.5rem; gap: 0.5rem; font-size: 0.88rem; }
   }
 
   /* ===== IMPRESIÓN ===== */
   @media print {
-    .back-top, .cover::before { display: none; }
+    .back-top, .cover::before, .reader-tools, .skip-link { display: none; }
     body { font-size: 11pt; color: black; background: white; }
     article.chapter { page-break-before: always; }
     .cover { min-height: auto; background: white; color: black; page-break-after: always; }
     a { color: black; text-decoration: none; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#241b18">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 </head>
 <body>
+<a class="skip-link" href="#contenido" data-i18n="skipContent">Saltar al contenido</a>
 
 <!-- ===== PORTADA ===== -->
 <header class="cover">
   <div class="cover-content">
-    <div class="eyebrow">Ensayo Corporativo · Edición 2026</div>
+    <div class="eyebrow" data-i18n="eyebrow">Ensayo Corporativo · Edición 2026</div>
     <h1>El Radar Corporativo</h1>
-    <p class="subtitle">Hiperconectividad, Seguridad y el Nuevo Mandato de Supervivencia Empresarial</p>
-    <a class="edition-link" href="radar-corporativo-ampliado.html">Leer la versión extendida</a>
-    <div class="meta">Guía para la inteligencia de riesgos · El deber de cuidado · La relocalización estratégica</div>
+    <p class="subtitle" data-i18n="subtitle">Hiperconectividad, Seguridad y el Nuevo Mandato de Supervivencia Empresarial</p>
+    <a class="edition-link" href="radar-corporativo-ampliado.html" data-i18n="extended">Leer la versión extendida</a>
+    <div class="meta" data-i18n="meta">Guía para la inteligencia de riesgos · El deber de cuidado · La relocalización estratégica</div>
   </div>
 </header>
 
+<section class="reader-tools" aria-label="Herramientas de lectura">
+  <div class="search-field">
+    <label for="book-search" data-i18n="searchLabel">Buscar en el libro</label>
+    <input id="book-search" type="search" placeholder="Escribe una palabra o frase" autocomplete="off" data-i18n-placeholder="searchPlaceholder">
+  </div>
+  <div>
+    <label for="language" data-i18n="languageLabel">Idioma de la interfaz</label>
+    <select id="language" aria-label="Idioma">
+      <option value="es" selected>Español</option>
+      <option value="en">English</option>
+      <option value="pt-BR">Português (Brasil)</option>
+    </select>
+  </div>
+  <button id="install-app" type="button" hidden data-i18n="install">Instalar app</button>
+  <p class="search-status" id="search-status" role="status" aria-live="polite"></p>
+  <p class="language-note" data-i18n="languageNote">Al cambiar el idioma se abre la edición completa correspondiente.</p>
+</section>
+
 <!-- ===== ÍNDICE ===== -->
-<nav class="toc" id="indice">
-  <h2>Índice</h2>
+<nav class="toc" id="indice" aria-label="Índice de capítulos" data-i18n-aria-label="chapterIndex">
+  <h2 data-i18n="contents">Índice</h2>
   <ol>
-    <li><a href="#cap1">Introducción</a><span class="desc">De la amenaza climática al riesgo total</span></li>
-    <li><a href="#cap2">La teoría de la hiperconectividad aplicada a la supervivencia</a><span class="desc">De la información fragmentada a la inteligencia integrada</span></li>
-    <li><a href="#cap3">El Radar Local: el microclima de la inseguridad</a><span class="desc">Delito, clima, salud y política de proximidad</span></li>
-    <li><a href="#cap4">El Radar Nacional: identificando los refugios seguros</a><span class="desc">Rankings, leyes y ciudades refugio</span></li>
-    <li><a href="#cap5">El Radar Global: el macroclima de la estabilidad</a><span class="desc">Geopolítica, cadenas de abasto y fenómenos globales</span></li>
-    <li><a href="#cap6">El algoritmo de la realidad: el Índice de Viabilidad y Riesgo</a><span class="desc">El semáforo corporativo que decide el futuro</span></li>
-    <li><a href="#cap7">El deber de cuidado: la empresa como protectora</a><span class="desc">La tribu, los protocolos y la lealtad</span></li>
-    <li><a href="#cap8">La sanción definitiva: la relocalización como voto con los pies</a><span class="desc">El mensaje al Estado fallido</span></li>
-    <li><a href="#cap9">Implementación práctica: construyendo tu Radar</a><span class="desc">Herramientas, red de observadores y formación</span></li>
-    <li><a href="#cap10">Conclusión: el poder de decidir y la tragedia de lo absurdo</a><span class="desc">Donde no hay seguridad, no hay futuro</span></li>
+    <li><a href="#cap1" data-i18n="toc1">Introducción</a><span class="desc" data-i18n="desc1">De la amenaza climática al riesgo total</span></li>
+    <li><a href="#cap2" data-i18n="toc2">La teoría de la hiperconectividad aplicada a la supervivencia</a><span class="desc" data-i18n="desc2">De la información fragmentada a la inteligencia integrada</span></li>
+    <li><a href="#cap3" data-i18n="toc3">El Radar Local: el microclima de la inseguridad</a><span class="desc" data-i18n="desc3">Delito, clima, salud y política de proximidad</span></li>
+    <li><a href="#cap4" data-i18n="toc4">El Radar Nacional: identificando los refugios seguros</a><span class="desc" data-i18n="desc4">Rankings, leyes y ciudades refugio</span></li>
+    <li><a href="#cap5" data-i18n="toc5">El Radar Global: el macroclima de la estabilidad</a><span class="desc" data-i18n="desc5">Geopolítica, cadenas de abasto y fenómenos globales</span></li>
+    <li><a href="#cap6" data-i18n="toc6">El algoritmo de la realidad: el Índice de Viabilidad y Riesgo</a><span class="desc" data-i18n="desc6">El semáforo corporativo que decide el futuro</span></li>
+    <li><a href="#cap7" data-i18n="toc7">El deber de cuidado: la empresa como protectora</a><span class="desc" data-i18n="desc7">La tribu, los protocolos y la lealtad</span></li>
+    <li><a href="#cap8" data-i18n="toc8">La sanción definitiva: la relocalización como voto con los pies</a><span class="desc" data-i18n="desc8">El mensaje al Estado fallido</span></li>
+    <li><a href="#cap9" data-i18n="toc9">Implementación práctica: construyendo tu Radar</a><span class="desc" data-i18n="desc9">Herramientas, red de observadores y formación</span></li>
+    <li><a href="#cap10" data-i18n="toc10">Conclusión: el poder de decidir y la tragedia de lo absurdo</a><span class="desc" data-i18n="desc10">Donde no hay seguridad, no hay futuro</span></li>
   </ol>
 </nav>
 
 <!-- ===== CONTENIDO ===== -->
-<main>
+<main id="contenido">
 
   <!-- CAPÍTULO 1 -->
   <article class="chapter" id="cap1">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 01</div>
-      <h2 class="chapter-title">Introducción</h2>
-      <p class="chapter-lead">De la amenaza climática al riesgo total: por qué las empresas deben despertar.</p>
+      <div class="chapter-number" data-i18n="chapterNumber1">Capítulo 01</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">📖</span><h2 class="chapter-title" data-i18n="chapterTitle1">Introducción</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead1">De la amenaza climática al riesgo total: por qué las empresas deben despertar.</p>
     </div>
 
     <p>En nuestra obra anterior, <em>División de Seguimiento Climático y Fenómenos Meteorológicos (DSCFM)</em>, establecimos una premisa fundamental: <strong>el cambio climático es un multiplicador de riesgos transversales</strong> que atraviesa todas las dimensiones de la vida social, productiva y ecológica, y que la única forma de sobrevivir y prosperar es mediante el registro sistemático, el cruce de datos, la generación de protocolos propios y la enseñanza del seguimiento como condición de adaptación.</p>
@@ -497,9 +615,9 @@
   <!-- CAPÍTULO 2 -->
   <article class="chapter" id="cap2">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 02</div>
-      <h2 class="chapter-title">La teoría de la hiperconectividad aplicada a la supervivencia</h2>
-      <p class="chapter-lead">De la información fragmentada a la inteligencia integrada.</p>
+      <div class="chapter-number" data-i18n="chapterNumber2">Capítulo 02</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">👁️</span><h2 class="chapter-title" data-i18n="chapterTitle2">La teoría de la hiperconectividad aplicada a la supervivencia</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead2">De la información fragmentada a la inteligencia integrada.</p>
     </div>
 
     <h3>2.1 Qué es la hiperconectividad empresarial</h3>
@@ -542,9 +660,9 @@
   <!-- CAPÍTULO 3 -->
   <article class="chapter" id="cap3">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 03</div>
-      <h2 class="chapter-title">El Radar Local: el microclima de la inseguridad</h2>
-      <p class="chapter-lead">Delito, clima, salud y política de proximidad.</p>
+      <div class="chapter-number" data-i18n="chapterNumber3">Capítulo 03</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">📍</span><h2 class="chapter-title" data-i18n="chapterTitle3">El Radar Local: el microclima de la inseguridad</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead3">Delito, clima, salud y política de proximidad.</p>
     </div>
 
     <h3>3.1 Eventos policiales y delictivos: indicadores tempranos</h3>
@@ -581,9 +699,9 @@
   <!-- CAPÍTULO 4 -->
   <article class="chapter" id="cap4">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 04</div>
-      <h2 class="chapter-title">El Radar Nacional: identificando los refugios seguros</h2>
-      <p class="chapter-lead">Rankings, leyes y ciudades refugio.</p>
+      <div class="chapter-number" data-i18n="chapterNumber4">Capítulo 04</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🏛️</span><h2 class="chapter-title" data-i18n="chapterTitle4">El Radar Nacional: identificando los refugios seguros</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead4">Rankings, leyes y ciudades refugio.</p>
     </div>
 
     <h3>4.1 Rankings de seguridad y estado de derecho</h3>
@@ -610,9 +728,9 @@
   <!-- CAPÍTULO 5 -->
   <article class="chapter" id="cap5">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 05</div>
-      <h2 class="chapter-title">El Radar Global: el macroclima de la estabilidad</h2>
-      <p class="chapter-lead">Geopolítica, cadenas de abasto y fenómenos globales.</p>
+      <div class="chapter-number" data-i18n="chapterNumber5">Capítulo 05</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🌐</span><h2 class="chapter-title" data-i18n="chapterTitle5">El Radar Global: el macroclima de la estabilidad</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead5">Geopolítica, cadenas de abasto y fenómenos globales.</p>
     </div>
 
     <h3>5.1 Tensiones geopolíticas internacionales</h3>
@@ -634,9 +752,9 @@
   <!-- CAPÍTULO 6 -->
   <article class="chapter" id="cap6">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 06</div>
-      <h2 class="chapter-title">El algoritmo de la realidad: el Índice de Viabilidad y Riesgo</h2>
-      <p class="chapter-lead">El semáforo corporativo que decide el futuro.</p>
+      <div class="chapter-number" data-i18n="chapterNumber6">Capítulo 06</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">📊</span><h2 class="chapter-title" data-i18n="chapterTitle6">El algoritmo de la realidad: el Índice de Viabilidad y Riesgo</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead6">El semáforo corporativo que decide el futuro.</p>
     </div>
 
     <h3>6.1 Diseño del IVR</h3>
@@ -654,6 +772,16 @@
         <tr><td><strong>Entorno Macro</strong></td><td>15%</td><td>Cadenas de abasto, inflación, volatilidad, geopolítica</td></tr>
       </tbody>
     </table>
+    <figure class="ivr-chart" id="ivr-chart" aria-labelledby="ivr-chart-title">
+      <h4 id="ivr-chart-title" data-i18n="chartTitle">Ponderación de componentes del IVR</h4>
+      <ul role="img" aria-label="Pesos de los componentes del IVR" data-i18n-aria-label="chartAlt">
+        <li><span data-i18n="weightSecurity">Seguridad física</span><span class="ivr-track"><span class="ivr-bar" style="--weight:100%"></span></span><span class="ivr-value">40%</span></li>
+        <li><span data-i18n="weightLegal">Estabilidad jurídica</span><span class="ivr-track"><span class="ivr-bar" style="--weight:62.5%"></span></span><span class="ivr-value">25%</span></li>
+        <li><span data-i18n="weightOperations">Continuidad operativa</span><span class="ivr-track"><span class="ivr-bar" style="--weight:50%"></span></span><span class="ivr-value">20%</span></li>
+        <li><span data-i18n="weightMacro">Entorno macro</span><span class="ivr-track"><span class="ivr-bar" style="--weight:37.5%"></span></span><span class="ivr-value">15%</span></li>
+      </ul>
+      <figcaption class="chapter-lead" data-i18n="chartCaption">Pesos de referencia descritos en el modelo; no representan una medición en tiempo real.</figcaption>
+    </figure>
 
     <h3>6.3 El semáforo corporativo</h3>
     <div class="semaforo">
@@ -691,9 +819,9 @@
   <!-- CAPÍTULO 7 -->
   <article class="chapter" id="cap7">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 07</div>
-      <h2 class="chapter-title">El deber de cuidado: la empresa como protectora</h2>
-      <p class="chapter-lead">La tribu, los protocolos y la lealtad.</p>
+      <div class="chapter-number" data-i18n="chapterNumber7">Capítulo 07</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🛡️</span><h2 class="chapter-title" data-i18n="chapterTitle7">El deber de cuidado: la empresa como protectora</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead7">La tribu, los protocolos y la lealtad.</p>
     </div>
 
     <h3>7.1 El vacío del Estado</h3>
@@ -723,9 +851,9 @@
   <!-- CAPÍTULO 8 -->
   <article class="chapter" id="cap8">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 08</div>
-      <h2 class="chapter-title">La sanción definitiva: la relocalización como voto con los pies</h2>
-      <p class="chapter-lead">El mensaje al Estado fallido.</p>
+      <div class="chapter-number" data-i18n="chapterNumber8">Capítulo 08</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🧭</span><h2 class="chapter-title" data-i18n="chapterTitle8">La sanción definitiva: la relocalización como voto con los pies</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead8">El mensaje al Estado fallido.</p>
     </div>
 
     <h3>8.1 El protocolo de éxodo</h3>
@@ -747,9 +875,9 @@
   <!-- CAPÍTULO 9 -->
   <article class="chapter" id="cap9">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 09</div>
-      <h2 class="chapter-title">Implementación práctica: construyendo tu Radar</h2>
-      <p class="chapter-lead">Herramientas, red de observadores y formación.</p>
+      <div class="chapter-number" data-i18n="chapterNumber9">Capítulo 09</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🧰</span><h2 class="chapter-title" data-i18n="chapterTitle9">Implementación práctica: construyendo tu Radar</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead9">Herramientas, red de observadores y formación.</p>
     </div>
 
     <h3>9.1 Herramientas de bajo costo</h3>
@@ -793,9 +921,9 @@
   <!-- CAPÍTULO 10 -->
   <article class="chapter" id="cap10">
     <div class="chapter-header">
-      <div class="chapter-number">Capítulo 10</div>
-      <h2 class="chapter-title">Conclusión: el poder de decidir y la tragedia de lo absurdo</h2>
-      <p class="chapter-lead">Donde no hay seguridad, no hay futuro.</p>
+      <div class="chapter-number" data-i18n="chapterNumber10">Capítulo 10</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">✨</span><h2 class="chapter-title" data-i18n="chapterTitle10">Conclusión: el poder de decidir y la tragedia de lo absurdo</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead10">Donde no hay seguridad, no hay futuro.</p>
     </div>
 
     <h3>10.1 Las empresas como únicos entes con movilidad estratégica</h3>
@@ -829,12 +957,326 @@
 
 </main>
 
-<a href="#indice" class="back-top" title="Volver al índice">↑</a>
+<a href="#indice" class="back-top" title="Volver al índice" data-i18n-title="backToContents">↑</a>
 
 <footer>
-  <p><strong>El Radar Corporativo</strong> · Edición 2026</p>
-  <p>Hiperconectividad, Seguridad y el Nuevo Mandato de Supervivencia Empresarial</p>
+  <p><strong>El Radar Corporativo</strong> · <span data-i18n="footerEdition">Edición 2026</span></p>
+  <p data-i18n="footerSubtitle">Hiperconectividad, Seguridad y el Nuevo Mandato de Supervivencia Empresarial</p>
 </footer>
 
+<script>
+  const translations = {
+    es: {
+      documentTitle: "El Radar Corporativo — Hiperconectividad, Seguridad y Supervivencia Empresarial",
+      eyebrow: "Ensayo Corporativo · Edición 2026",
+      subtitle: "Hiperconectividad, Seguridad y el Nuevo Mandato de Supervivencia Empresarial",
+      extended: "Leer la versión extendida",
+      meta: "Guía para la inteligencia de riesgos · El deber de cuidado · La relocalización estratégica",
+      searchLabel: "Buscar en el libro",
+      searchPlaceholder: "Escribe una palabra o frase",
+      languageLabel: "Idioma de la interfaz",
+      skipContent: "Saltar al contenido",
+      chapterIndex: "Índice de capítulos",
+      backToContents: "Volver al índice",
+      footerEdition: "Edición 2026",
+      footerSubtitle: "Hiperconectividad, Seguridad y el Nuevo Mandato de Supervivencia Empresarial",
+      install: "Instalar app",
+      contents: "Índice",
+      chartTitle: "Ponderación de componentes del IVR",
+      chartAlt: "Pesos de los componentes del IVR",
+      chartCaption: "Pesos de referencia descritos en el modelo; no representan una medición en tiempo real.",
+      weightSecurity: "Seguridad física",
+      weightLegal: "Estabilidad jurídica",
+      weightOperations: "Continuidad operativa",
+      weightMacro: "Entorno macro",
+      searchNoResults: "No se encontraron coincidencias.",
+      searchResults: "coincidencias",
+      languageNote: "Al cambiar el idioma se abre la edición completa correspondiente.",
+      chapter: "Capítulo",
+      toc: [
+        ["Introducción", "De la amenaza climática al riesgo total"],
+        ["La teoría de la hiperconectividad aplicada a la supervivencia", "De la información fragmentada a la inteligencia integrada"],
+        ["El Radar Local: el microclima de la inseguridad", "Delito, clima, salud y política de proximidad"],
+        ["El Radar Nacional: identificando los refugios seguros", "Rankings, leyes y ciudades refugio"],
+        ["El Radar Global: el macroclima de la estabilidad", "Geopolítica, cadenas de abasto y fenómenos globales"],
+        ["El algoritmo de la realidad: el Índice de Viabilidad y Riesgo", "El semáforo corporativo que decide el futuro"],
+        ["El deber de cuidado: la empresa como protectora", "La tribu, los protocolos y la lealtad"],
+        ["La sanción definitiva: la relocalización como voto con los pies", "El mensaje al Estado fallido"],
+        ["Implementación práctica: construyendo tu Radar", "Herramientas, red de observadores y formación"],
+        ["Conclusión: el poder de decidir y la tragedia de lo absurdo", "Donde no hay seguridad, no hay futuro"]
+      ]
+    },
+    en: {
+      documentTitle: "The Corporate Radar — Hyperconnectivity, Security, and Business Survival",
+      eyebrow: "Corporate Essay · 2026 Edition",
+      subtitle: "Hyperconnectivity, Security, and the New Mandate for Business Survival",
+      extended: "Read the extended edition",
+      meta: "A guide to risk intelligence · Duty of care · Strategic relocation",
+      searchLabel: "Search the book",
+      searchPlaceholder: "Enter a word or phrase",
+      languageLabel: "Interface language",
+      skipContent: "Skip to content",
+      chapterIndex: "Chapter index",
+      backToContents: "Back to contents",
+      footerEdition: "2026 Edition",
+      footerSubtitle: "Hyperconnectivity, Security, and the New Mandate for Business Survival",
+      install: "Install app",
+      contents: "Contents",
+      chartTitle: "Weighting of the IVR components",
+      chartAlt: "Weights of the IVR components",
+      chartCaption: "Reference weights described in the model; they are not a real-time measurement.",
+      weightSecurity: "Physical security",
+      weightLegal: "Legal stability",
+      weightOperations: "Operational continuity",
+      weightMacro: "Macro environment",
+      searchNoResults: "No matches found.",
+      searchResults: "matches",
+      languageNote: "Changing the language opens the complete edition in that language.",
+      chapter: "Chapter",
+      toc: [
+        ["Introduction", "From climate threat to total risk"],
+        ["The theory of hyperconnectivity applied to survival", "From fragmented information to integrated intelligence"],
+        ["The Local Radar: the microclimate of insecurity", "Crime, climate, health, and local politics"],
+        ["The National Radar: identifying safe havens", "Rankings, laws, and refuge cities"],
+        ["The Global Radar: the macroclimate of stability", "Geopolitics, supply chains, and global events"],
+        ["The algorithm of reality: the Viability and Risk Index (IVR)", "The corporate traffic light that shapes the future"],
+        ["The duty of care: the company as protector", "The team, protocols, and loyalty"],
+        ["The ultimate sanction: relocation as a vote with your feet", "The message to a failed state"],
+        ["Practical implementation: building your Radar", "Tools, observer networks, and training"],
+        ["Conclusion: the power to choose and the tragedy of the absurd", "Where there is no security, there is no future"]
+      ]
+    },
+    "pt-BR": {
+      documentTitle: "O Radar Corporativo — Hiperconectividade, Segurança e Sobrevivência Empresarial",
+      eyebrow: "Ensaio Corporativo · Edição 2026",
+      subtitle: "Hiperconectividade, Segurança e o Novo Mandato de Sobrevivência Empresarial",
+      extended: "Leia a edição ampliada",
+      meta: "Guia de inteligência de riscos · Dever de cuidado · Realocação estratégica",
+      searchLabel: "Buscar no livro",
+      searchPlaceholder: "Digite uma palavra ou frase",
+      languageLabel: "Idioma da interface",
+      skipContent: "Pular para o conteúdo",
+      chapterIndex: "Índice de capítulos",
+      backToContents: "Voltar ao sumário",
+      footerEdition: "Edição 2026",
+      footerSubtitle: "Hiperconectividade, Segurança e o Novo Mandato de Sobrevivência Empresarial",
+      install: "Instalar aplicativo",
+      contents: "Sumário",
+      chartTitle: "Pesos dos componentes do IVR",
+      chartAlt: "Pesos dos componentes do IVR",
+      chartCaption: "Pesos de referência descritos no modelo; não representam uma medição em tempo real.",
+      weightSecurity: "Segurança física",
+      weightLegal: "Estabilidade jurídica",
+      weightOperations: "Continuidade operacional",
+      weightMacro: "Ambiente macroeconômico",
+      searchNoResults: "Nenhum resultado encontrado.",
+      searchResults: "resultados",
+      languageNote: "Ao mudar o idioma, a edição completa correspondente será aberta.",
+      chapter: "Capítulo",
+      toc: [
+        ["Introdução", "Da ameaça climática ao risco total"],
+        ["A teoria da hiperconectividade aplicada à sobrevivência", "Da informação fragmentada à inteligência integrada"],
+        ["O Radar Local: o microclima da insegurança", "Crime, clima, saúde e política de proximidade"],
+        ["O Radar Nacional: identificando refúgios seguros", "Rankings, leis e cidades-refúgio"],
+        ["O Radar Global: o macroclima da estabilidade", "Geopolítica, cadeias de suprimentos e eventos globais"],
+        ["O algoritmo da realidade: o Índice de Viabilidade e Risco", "O semáforo corporativo que decide o futuro"],
+        ["O dever de cuidado: a empresa como protetora", "A equipe, os protocolos e a lealdade"],
+        ["A sanção definitiva: a realocação como voto com os pés", "A mensagem ao Estado falido"],
+        ["Implementação prática: construindo seu Radar", "Ferramentas, rede de observadores e capacitação"],
+        ["Conclusão: o poder de decidir e a tragédia do absurdo", "Onde não há segurança, não há futuro"]
+      ]
+    }
+  };
+
+  const languagePicker = document.querySelector("#language");
+  const searchInput = document.querySelector("#book-search");
+  const searchStatus = document.querySelector("#search-status");
+  let currentLanguage = "es";
+  let currentMatch = -1;
+
+  function setLanguage(language) {
+    const copy = translations[language];
+    currentLanguage = language;
+    document.documentElement.lang = language === "pt-BR" ? "pt-BR" : language;
+    document.title = copy.documentTitle;
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+      const translation = copy[element.dataset.i18n];
+      if (translation !== undefined) element.textContent = translation;
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+      const translation = copy[element.dataset.i18nPlaceholder];
+      if (translation !== undefined) element.placeholder = translation;
+    });
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+      const translation = copy[element.dataset.i18nAriaLabel];
+      if (translation !== undefined) element.setAttribute("aria-label", translation);
+    });
+    document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+      const translation = copy[element.dataset.i18nTitle];
+      if (translation !== undefined) element.title = translation;
+    });
+    copy.toc.forEach(([title, description], index) => {
+      const chapter = index + 1;
+      document.querySelector(`[data-i18n="toc${chapter}"]`).textContent = title;
+      document.querySelector(`[data-i18n="desc${chapter}"]`).textContent = description;
+      document.querySelector(`[data-i18n="chapterTitle${chapter}"]`).textContent = title;
+      document.querySelector(`[data-i18n="chapterNumber${chapter}"]`).textContent =
+        `${copy.chapter} ${String(chapter).padStart(2, "0")}`;
+      document.querySelector(`[data-i18n="chapterLead${chapter}"]`).textContent = description;
+    });
+    refreshSearch();
+  }
+
+  languagePicker.value = currentLanguage;
+  setLanguage(currentLanguage);
+
+  function fold(value) {
+    return value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase();
+  }
+
+  function clearSearchMarks() {
+    document.querySelectorAll("mark.search-match").forEach((mark) => {
+      mark.replaceWith(document.createTextNode(mark.textContent));
+    });
+  }
+
+  function refreshSearch() {
+    clearSearchMarks();
+    currentMatch = -1;
+    const query = fold(searchInput.value.trim());
+    if (!query) {
+      searchStatus.textContent = "";
+      return;
+    }
+
+    const root = document.querySelector("main");
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.parentElement.closest("script, style, mark, .chapter-icon")
+          ? NodeFilter.FILTER_REJECT
+          : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    const matches = [];
+
+    textNodes.forEach((node) => {
+      const text = node.nodeValue;
+      const foldedCharacters = [];
+      const originalStarts = [];
+      const originalEnds = [];
+      let originalIndex = 0;
+
+      for (const character of text) {
+        const normalized = fold(character);
+        for (const foldedCharacter of normalized) {
+          for (let offset = 0; offset < foldedCharacter.length; offset += 1) {
+            foldedCharacters.push(foldedCharacter[offset]);
+            originalStarts.push(originalIndex);
+            originalEnds.push(originalIndex + character.length);
+          }
+        }
+        originalIndex += character.length;
+      }
+
+      const foldedText = foldedCharacters.join("");
+      const fragments = document.createDocumentFragment();
+      let cursor = 0;
+      let matchIndex = foldedText.indexOf(query);
+      while (matchIndex !== -1) {
+        const start = originalStarts[matchIndex];
+        const end = originalEnds[matchIndex + query.length - 1];
+        if (start >= cursor && end !== undefined) {
+          fragments.append(document.createTextNode(text.slice(cursor, start)));
+          const mark = document.createElement("mark");
+          mark.className = "search-match";
+          mark.textContent = text.slice(start, end);
+          fragments.append(mark);
+          matches.push(mark);
+          cursor = end;
+        }
+        matchIndex = foldedText.indexOf(query, matchIndex + query.length);
+      }
+
+      if (matches.length && cursor > 0) {
+        fragments.append(document.createTextNode(text.slice(cursor)));
+        node.replaceWith(fragments);
+      }
+    });
+
+    if (matches.length) {
+      searchStatus.textContent = `${matches.length} ${translations[currentLanguage].searchResults}.`;
+      matches[0].classList.add("current");
+      currentMatch = 0;
+    } else {
+      searchStatus.textContent = translations[currentLanguage].searchNoResults;
+    }
+  }
+
+  searchInput.addEventListener("input", refreshSearch);
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      searchInput.value = "";
+      refreshSearch();
+    } else if (event.key === "Enter") {
+      const matches = document.querySelectorAll("mark.search-match");
+      if (matches.length) {
+        matches[currentMatch]?.classList.remove("current");
+        currentMatch = (currentMatch + 1) % matches.length;
+        matches[currentMatch].classList.add("current");
+        matches[currentMatch].scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "center"
+        });
+      }
+    }
+  });
+  languagePicker.addEventListener("change", () => {
+    const editions = { es: "index.html", en: "index.en.html", "pt-BR": "index.pt-br.html" };
+    window.location.assign(editions[languagePicker.value]);
+  });
+
+  const chart = document.querySelector("#ivr-chart");
+  if ("IntersectionObserver" in window) {
+    const chartObserver = new IntersectionObserver((entries, observer) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        chart.classList.add("is-visible");
+        observer.disconnect();
+      }
+    }, { threshold: 0.25 });
+    chartObserver.observe(chart);
+  } else {
+    chart.classList.add("is-visible");
+  }
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js")
+      .catch((error) => console.error("No se pudo registrar el service worker:", error));
+  }
+
+  let installPrompt;
+  const installButton = document.querySelector("#install-app");
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    installPrompt = event;
+    installButton.hidden = false;
+  });
+  installButton.addEventListener("click", async () => {
+    if (!installPrompt) return;
+    try {
+      await installPrompt.prompt();
+    } catch (error) {
+      console.error("No se pudo iniciar la instalación de la app:", error);
+    } finally {
+      installPrompt = null;
+      installButton.hidden = true;
+    }
+  });
+  window.addEventListener("appinstalled", () => {
+    installButton.hidden = true;
+    installPrompt = null;
+  });
+</script>
 </body>
 </html>

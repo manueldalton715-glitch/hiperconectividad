@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="documentTitle">The Corporate Radar — Hyperconnectivity, Security, and Business Survival</title>
+<style>
+  /* ===== RESET Y BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #faf8f3;
+    --text: #1a1a1a;
+    --accent: #8b0000;
+    --accent-2: #c9a961;
+    --muted: #666;
+    --border: #e0dcd0;
+    --card: #ffffff;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --green: #2d7a3e;
+    --yellow: #d4a017;
+    --red: #a02020;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141414;
+      --text: #e8e6e1;
+      --accent: #d94545;
+      --accent-2: #c9a961;
+      --muted: #999;
+      --border: #2a2a2a;
+      --card: #1c1c1c;
+      --shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  .skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 200;
+    padding: 0.75rem 1rem;
+    background: var(--card);
+    color: var(--text);
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus { transform: translateY(0); }
+
+  body {
+    font-family: 'Georgia', 'Charter', 'Iowan Old Style', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== PORTADA ===== */
+  .cover {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #3a1a1a 50%, #1a1a1a 100%);
+    color: #f5f0e6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(201,169,97,0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(139,0,0,0.2) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+  .cover .eyebrow {
+    font-family: 'Helvetica', sans-serif;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--accent-2);
+    margin-bottom: 2rem;
+  }
+
+  .cover h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cover .subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-style: italic;
+    color: #c9c4b8;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .cover .meta {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #888;
+    border-top: 1px solid rgba(201,169,97,0.3);
+    padding-top: 2rem;
+    margin-top: 2rem;
+  }
+
+  .cover .edition-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--accent-2);
+    border-radius: 4px;
+    color: #f5f0e6;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .cover .edition-link:hover {
+    background: var(--accent-2);
+    color: #1a1a1a;
+  }
+
+  .cover .edition-link:focus-visible {
+    outline: 3px solid #f5f0e6;
+    outline-offset: 4px;
+  }
+
+  /* ===== NAVEGACIÓN ===== */
+  .toc {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .reader-tools {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+    display: grid;
+    grid-template-columns: minmax(12rem, 1fr) auto auto;
+    align-items: end;
+    gap: 1rem;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  .reader-tools label { display: block; margin-bottom: 0.35rem; font-size: 0.85rem; font-weight: 700; }
+  .reader-tools input, .reader-tools select, .reader-tools button {
+    min-height: 46px;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--card);
+    color: var(--text);
+    font: inherit;
+  }
+  .reader-tools input { width: 100%; }
+  .reader-tools button { cursor: pointer; }
+  .reader-tools button:hover { border-color: var(--accent); }
+  .reader-tools input:focus-visible, .reader-tools select:focus-visible, .reader-tools button:focus-visible {
+    outline: 3px solid var(--accent-2);
+    outline-offset: 2px;
+  }
+  .search-status { grid-column: 1 / -1; min-height: 1.4em; color: var(--muted); font-size: 0.85rem; }
+  .language-note { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 0.8rem; }
+  mark.search-match { background: #ffe08a; color: #1a1a1a; border-radius: 2px; }
+  mark.search-match.current { outline: 2px solid var(--accent); }
+
+  .toc h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-2);
+    padding-bottom: 0.5rem;
+  }
+
+  .toc ol {
+    list-style: none;
+    counter-reset: chapter;
+  }
+
+  .toc li {
+    counter-increment: chapter;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .toc li:hover {
+    padding-left: 0.5rem;
+    background: rgba(201,169,97,0.08);
+  }
+
+  .toc li::before {
+    content: counter(chapter, decimal-leading-zero);
+    color: var(--accent-2);
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 700;
+    margin-right: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .toc a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .toc a:hover { color: var(--accent); }
+
+  .toc .desc {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.2rem;
+    margin-left: 2.5rem;
+  }
+
+  /* ===== CONTENIDO PRINCIPAL ===== */
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 2rem 6rem;
+  }
+
+  article.chapter {
+    margin-bottom: 5rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .chapter-header {
+    border-top: 3px double var(--accent);
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .chapter-number {
+    font-family: 'Helvetica', sans-serif;
+    color: var(--accent-2);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .chapter-heading-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .chapter-icon {
+    flex: 0 0 auto;
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--card);
+    font-size: 1.5rem;
+  }
+
+  h2.chapter-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    line-height: 1.2;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .chapter-lead {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1.1rem;
+    border-left: 3px solid var(--accent-2);
+    padding-left: 1.2rem;
+    margin-top: 1rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    color: var(--text);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h4 {
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin: 1.8rem 0 0.8rem;
+    font-weight: 700;
+  }
+
+  p { margin-bottom: 1.2rem; }
+
+  strong { color: var(--text); font-weight: 700; }
+
+  em { color: var(--accent); font-style: italic; }
+
+  ul, ol { margin: 1rem 0 1.5rem 1.5rem; }
+
+  li { margin-bottom: 0.5rem; }
+
+  /* ===== CAJAS ESPECIALES ===== */
+  .callout {
+    background: var(--card);
+    border-left: 4px solid var(--accent-2);
+    padding: 1.5rem 1.8rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+    box-shadow: var(--shadow);
+  }
+
+  .callout.warning { border-left-color: var(--red); }
+  .callout.success { border-left-color: var(--green); }
+  .callout.info { border-left-color: var(--accent-2); }
+
+  .callout-title {
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  blockquote {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--muted);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    line-height: 1.5;
+  }
+
+  blockquote::before {
+    content: '"';
+    font-size: 3rem;
+    color: var(--accent-2);
+    line-height: 0;
+    vertical-align: -0.5rem;
+    margin-right: 0.3rem;
+  }
+
+  /* ===== SEMÁFORO ===== */
+  .semaforo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .semaforo-item {
+    padding: 1.5rem;
+    border-radius: 10px;
+    color: white;
+    box-shadow: var(--shadow);
+  }
+
+  .semaforo-item.verde { background: linear-gradient(135deg, #2d7a3e, #1f5a2c); }
+  .semaforo-item.amarillo { background: linear-gradient(135deg, #d4a017, #a67c00); }
+  .semaforo-item.rojo { background: linear-gradient(135deg, #a02020, #6b1515); }
+
+  .semaforo-item .luz {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    margin-bottom: 0.8rem;
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+  }
+
+  .semaforo-item h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Helvetica', sans-serif;
+  }
+
+  .semaforo-item p { font-size: 0.95rem; margin: 0; line-height: 1.5; }
+
+  /* ===== TABLAS ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.95rem;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .ivr-chart {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+  }
+  .ivr-chart h4 { margin-top: 0; }
+  .ivr-chart ul { list-style: none; margin: 1rem 0 0; padding: 0; }
+  .ivr-chart li { display: grid; grid-template-columns: minmax(9rem, 1fr) 3fr 3rem; align-items: center; gap: 0.8rem; margin: 0.8rem 0; }
+  .ivr-track { height: 0.9rem; overflow: hidden; border-radius: 99px; background: var(--border); }
+  .ivr-bar { display: block; width: var(--weight); height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transform: scaleX(0); transform-origin: left; }
+  .ivr-chart.is-visible .ivr-bar { animation: grow-bar 900ms cubic-bezier(.2,.7,.2,1) forwards; }
+  .ivr-chart li:nth-child(2) .ivr-bar { animation-delay: 100ms; }
+  .ivr-chart li:nth-child(3) .ivr-bar { animation-delay: 200ms; }
+  .ivr-chart li:nth-child(4) .ivr-bar { animation-delay: 300ms; }
+  .ivr-value { font-family: Helvetica, Arial, sans-serif; font-weight: 700; text-align: right; }
+  @keyframes grow-bar { to { transform: scaleX(1); } }
+
+  th {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+
+  td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: rgba(201,169,97,0.05); }
+
+  /* ===== BOTÓN VOLVER ARRIBA ===== */
+  .back-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--accent);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+    z-index: 100;
+  }
+
+  .back-top:hover { transform: translateY(-3px); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #1a1a1a;
+    color: #888;
+    text-align: center;
+    padding: 3rem 2rem;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+  }
+
+  footer strong { color: var(--accent-2); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    body { font-size: 17px; }
+    main, .toc { padding: 1.5rem 1.2rem; }
+    .cover { padding: 3rem 1.5rem; }
+    blockquote { font-size: 1.1rem; }
+    .back-top { width: 42px; height: 42px; bottom: 1rem; right: 1rem; }
+    .reader-tools { grid-template-columns: 1fr 1fr; padding: 0 1.2rem 1.5rem; }
+    .reader-tools .search-field { grid-column: 1 / -1; }
+    .reader-tools button { width: 100%; }
+    .chapter-icon { width: 2.5rem; height: 2.5rem; font-size: 1.25rem; }
+    table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .ivr-chart { padding: 1rem; }
+    .ivr-chart li { grid-template-columns: minmax(7rem, 1fr) 2fr 2.5rem; gap: 0.5rem; font-size: 0.88rem; }
+  }
+
+  /* ===== IMPRESIÓN ===== */
+  @media print {
+    .back-top, .cover::before, .reader-tools, .skip-link { display: none; }
+    body { font-size: 11pt; color: black; background: white; }
+    article.chapter { page-break-before: always; }
+    .cover { min-height: auto; background: white; color: black; page-break-after: always; }
+    a { color: black; text-decoration: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#241b18">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip-link" href="#contenido" data-i18n="skipContent">Skip to content</a>
+
+<!-- ===== PORTADA ===== -->
+<header class="cover">
+  <div class="cover-content">
+    <div class="eyebrow" data-i18n="eyebrow">Corporate Essay · 2026 Edition</div>
+    <h1>The Corporate Radar</h1>
+    <p class="subtitle" data-i18n="subtitle">Hyperconnectivity, Security, and the New Mandate for Business Survival</p>
+    <a class="edition-link" href="radar-corporativo-ampliado.en.html" data-i18n="extended">Read the extended edition</a>
+    <div class="meta" data-i18n="meta">A guide to risk intelligence · Duty of care · Strategic relocation</div>
+  </div>
+</header>
+
+<section class="reader-tools" aria-label="Reader tools">
+  <div class="search-field">
+    <label for="book-search" data-i18n="searchLabel">Search the book</label>
+    <input id="book-search" type="search" placeholder="Enter a word or phrase" autocomplete="off" data-i18n-placeholder="searchPlaceholder">
+  </div>
+  <div>
+    <label for="language" data-i18n="languageLabel">Edition language</label>
+    <select id="language" aria-label="Edition language">
+      <option value="index.html">Spanish</option>
+      <option value="index.en.html" selected>English</option>
+      <option value="index.pt-br.html">Brazilian Portuguese</option>
+    </select>
+  </div>
+  <button id="install-app" type="button" hidden data-i18n="install">Install app</button>
+  <p class="search-status" id="search-status" role="status" aria-live="polite"></p>
+  <p class="language-note" data-i18n="languageNote">This is the complete English translation of the essay.</p>
+</section>
+
+<!-- ===== ÍNDICE ===== -->
+<nav class="toc" id="indice" aria-label="Chapter index" data-i18n-aria-label="chapterIndex">
+  <h2 data-i18n="contents">Contents</h2>
+  <ol>
+    <li><a href="#cap1" data-i18n="toc1">Introduction</a><span class="desc" data-i18n="desc1">From climate threat to total risk</span></li>
+    <li><a href="#cap2" data-i18n="toc2">The theory of hyperconnectivity applied to survival</a><span class="desc" data-i18n="desc2">From fragmented information to integrated intelligence</span></li>
+    <li><a href="#cap3" data-i18n="toc3">The Local Radar: the microclimate of insecurity</a><span class="desc" data-i18n="desc3">Crime, climate, health, and local politics</span></li>
+    <li><a href="#cap4" data-i18n="toc4">The National Radar: identifying safe havens</a><span class="desc" data-i18n="desc4">Rankings, laws, and refuge cities</span></li>
+    <li><a href="#cap5" data-i18n="toc5">The Global Radar: the macroclimate of stability</a><span class="desc" data-i18n="desc5">Geopolitics, supply chains, and global events</span></li>
+    <li><a href="#cap6" data-i18n="toc6">The algorithm of reality: the Viability and Risk Index</a><span class="desc" data-i18n="desc6">The corporate traffic light that shapes the future</span></li>
+    <li><a href="#cap7" data-i18n="toc7">The duty of care: the company as protector</a><span class="desc" data-i18n="desc7">The team, protocols, and loyalty</span></li>
+    <li><a href="#cap8" data-i18n="toc8">The ultimate sanction: relocation as a vote with your feet</a><span class="desc" data-i18n="desc8">The message to a failed state</span></li>
+    <li><a href="#cap9" data-i18n="toc9">Practical implementation: building your Radar</a><span class="desc" data-i18n="desc9">Tools, observer networks, and training</span></li>
+    <li><a href="#cap10" data-i18n="toc10">Conclusion: the power to choose and the tragedy of the absurd</a><span class="desc" data-i18n="desc10">Where there is no security, there is no future</span></li>
+  </ol>
+</nav>
+
+<!-- ===== CONTENIDO ===== -->
+<main id="contenido">
+
+  <!-- CAPÍTULO 1 -->
+  <article class="chapter" id="cap1">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber1">Chapter 01</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">📖</span><h2 class="chapter-title" data-i18n="chapterTitle1">Introduction</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead1">From climate threat to total risk: why businesses must wake up.</p>
+    </div>
+
+    <p>In our previous work, <em>Climate Monitoring and Meteorological Phenomena Division (DSCFM)</em>, we established a fundamental premise: <strong>climate change is a cross-cutting risk multiplier</strong> that affects every dimension of social, productive, and ecological life, and the only way to survive and thrive is through systematic recording, cross-referencing data, developing our own protocols, and teaching monitoring as a condition for adaptation.</p>
+
+    <p>We showed that information exists, but is fragmented, stripped of context, and disconnected from decision-making. No one connects the dots between temperature and fungus, drought and famine, or flooding and a cholera outbreak. The solution is not simply to monitor, but to <strong>teach people to monitor, to think from recorded evidence, and to develop their own protocols</strong>.</p>
+
+    <p>Today, that same reasoning must take a logical and urgent next step toward a threat just as lethal, everyday, and systemic: <strong>insecurity, institutional instability, the collapse of the social fabric, and the breaking of the basic compact between the state and its citizens: the promise that people can walk the streets without fear.</strong></p>
+
+    <p>We live in the age of <strong>hyperconnectivity</strong>. Information exists in vast quantities and flows in real time. Every crime, protest, proposed law, geopolitical conflict, and extreme weather event leaves a digital trace that can be recorded, cross-referenced, and analyzed. Yet businesses continue to operate blind.</p>
+
+    <div class="callout warning">
+      <div class="callout-title">Central premise</div>
+      <p>A modern company cannot be merely an economic entity; it must become an <strong>intelligent, hyperconnected organization with an awareness of its territory</strong>.</p>
+    </div>
+
+    <p>The premise is simple: <strong>the more eyes there are recording events, the better a company can make decisions before it is too late</strong>. This is not about spying; it is about staying alert. It is about detecting weak signals before they become crises. It is about turning fear into data, and data into the power to decide.</p>
+
+    <blockquote>No employee wants to suffer a tragedy just so someone can steal their sneakers.</blockquote>
+
+    <p>Ordinary citizens, honest workers, and families trying to get ahead are trapped in territories abandoned by the state. They lack the capital mobility and structural flexibility to move away overnight. <strong>Businesses do not.</strong></p>
+
+    <p>Businesses are the only entities with the logistical, financial, and operational capacity to decide whether to stay or leave. They can build a radar, read reality without political filters, calculate risk, and make a strategic move to protect their people.</p>
+
+    <p>This book is a guide to building that radar, implementing that hyperconnectivity, fulfilling that duty of care, and making the decision to relocate when necessary.</p>
+
+    <p><strong>Where there is no security, there is no future. For the sake of survival and ethics, businesses must choose the future.</strong></p>
+  </article>
+
+  <!-- CAPÍTULO 2 -->
+  <article class="chapter" id="cap2">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber2">Chapter 02</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">👁️</span><h2 class="chapter-title" data-i18n="chapterTitle2">The theory of hyperconnectivity applied to survival</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead2">From fragmented information to integrated intelligence.</p>
+    </div>
+
+    <h3>2.1 What is business hyperconnectivity?</h3>
+    <p>Hyperconnectivity is not having a social media presence or sending mass emails. It is an <strong>operating condition</strong>: an organization’s ability to weave a network of invisible sensors that listen in real time to the pulse of its territory, market, political climate, and social fabric.</p>
+
+    <p>In the twentieth century, businesses operated on filtered information: Monday’s newspaper, the accountant’s monthly report, the logistics manager’s call when it was already too late. In the twenty-first century, that leaves a business blind. Business hyperconnectivity is the answer to that blindness.</p>
+
+    <h3>2.2 From fragmented information to integrated intelligence</h3>
+    <p>The problem is not a lack of information. It is <strong>fragmentation</strong>.</p>
+    <ul>
+      <li>The local paper reports a robbery but does not connect it with the area’s power outage.</li>
+      <li>The police publish quarterly statistics but do not flag the weekly trend.</li>
+      <li>The supplier says it cannot deliver but does not explain that protesters have blocked the road.</li>
+    </ul>
+    <p><strong>No one connects the dots.</strong> Integrated intelligence means taking scattered information, putting it in context, cross-referencing it with other variables, and turning it into operational decisions.</p>
+
+    <h3>2.3 The principle of “many eyes”</h3>
+    <p>A business cannot rely on a single information channel. It needs <strong>many eyes recording events from many angles in real time</strong>:</p>
+    <ul>
+      <li><strong>Employees</strong> reporting what they see in their neighborhoods and along their routes.</li>
+      <li><strong>Suppliers</strong> warning about outages and delays.</li>
+      <li><strong>Customers</strong> sharing their perceptions of insecurity.</li>
+      <li><strong>Digital sensors</strong>: news scraping, neighborhood groups, police radio.</li>
+      <li><strong>Official data</strong>: statistics, bills, bulletins.</li>
+      <li><strong>Community observers</strong>: residents, business owners, neighborhood leaders.</li>
+    </ul>
+
+    <div class="callout success">
+      <div class="callout-title">Weak signals</div>
+      <p>When 30 sets of eyes report the same weak signal, it stops being an anecdote and becomes a <strong>trend</strong>. Detected in time, that trend can mean the difference between prevention and tragedy.</p>
+    </div>
+
+    <h3>2.4 Corporate speed versus bureaucratic slowness</h3>
+    <p>The state operates on political timelines. A business must operate on operational timelines. Hyperconnectivity gives a business a <strong>survival advantage</strong>: while the municipality debates whether to increase patrols, the company has already rerouted its trucks.</p>
+
+    <h3>2.5 Turning fear into data, and data into power</h3>
+    <p>Fear paralyzes. Data empowers. Hyperconnectivity turns fear into a spreadsheet, and data cross-referenced with other variables creates <strong>the power to decide</strong>: stay with protocols in place, relocate strategically, invest with knowledge, or leave with a plan.</p>
+  </article>
+
+  <!-- CAPÍTULO 3 -->
+  <article class="chapter" id="cap3">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber3">Chapter 03</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">📍</span><h2 class="chapter-title" data-i18n="chapterTitle3">The Local Radar: the microclimate of insecurity</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead3">Crime, climate, health, and local politics.</p>
+    </div>
+
+    <h3>3.1 Police and criminal incidents: early indicators</h3>
+    <p>The local radar starts with the most visible factor: <strong>everyday crime</strong>—the kind that erodes quality of life and creates a quiet terror.</p>
+    <ul>
+      <li>Robberies targeting employees on their way to and from work.</li>
+      <li>Home invasions targeting key employees.</li>
+      <li>Robberies of cargo and cash-in-transit vehicles.</li>
+      <li>Extortion disguised as a “protection fee.”</li>
+      <li>Repeated <strong>low-level crimes</strong>: early indicators of collapse.</li>
+      <li><strong>Abandoned zones</strong>: areas where the state has lost its monopoly on the use of force.</li>
+    </ul>
+
+    <h3>3.2 Extreme weather events</h3>
+    <p>Climate is not just an “environmental” issue. It is an <strong>operational risk multiplier</strong>. A flood cuts off access to a plant. A heat wave incapacitates 40% of the workforce. A severe storm cuts power and disrupts the cold chain.</p>
+
+    <h3>3.3 Disease outbreaks and emerging illnesses</h3>
+    <p>Dengue, post-flood leptospirosis, and gastrointestinal outbreaks: public health is an <strong>indicator of environmental conditions</strong>.</p>
+
+    <h3>3.4 Local politics</h3>
+    <p>Municipal corruption, proposed local laws, abusive tax pressure, and public works that block access: all of this is recorded, projected, and turned into <strong>input for decision-making</strong>.</p>
+
+    <h3>3.5 Duty-of-care protocols</h3>
+    <p>With the local radar in operation, the company designs protocols for its team:</p>
+    <ul>
+      <li>Company transportation through poorly lit or high-risk areas.</li>
+      <li>Staggered schedules.</li>
+      <li>Facility hardening based on risk level.</li>
+      <li><strong>Non-resistance protocol</strong>: life is worth more than merchandise.</li>
+      <li>Panic buttons and personal-safety training.</li>
+    </ul>
+  </article>
+
+  <!-- CAPÍTULO 4 -->
+  <article class="chapter" id="cap4">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber4">Chapter 04</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🏛️</span><h2 class="chapter-title" data-i18n="chapterTitle4">The National Radar: identifying safe havens</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead4">Rankings, laws, and refuge cities.</p>
+    </div>
+
+    <h3>4.1 Security and rule-of-law rankings</h3>
+    <p>If the local radar says the city is a battlefield, the national radar looks for <strong>where the safe havens are</strong>: provincial security rankings, rule-of-law indices, and ease-of-doing-business rankings.</p>
+
+    <h3>4.2 Domestic geopolitical tensions</h3>
+    <p>Provinces competing for investment, interjurisdictional conflicts over resources, and changes in provincial government: the company monitors capital flows and regional tax incentives.</p>
+
+    <h3>4.3 Proposed national legislation</h3>
+    <p>Bills that could affect labor rules, taxes, imports and exports, or prices. The company does not wait for a law to pass. It <strong>projects scenarios</strong>.</p>
+
+    <h3>4.4 Supply chains</h3>
+    <p>Vulnerabilities, alternative routes, backup suppliers, and safety stock. How many days can I operate independently?</p>
+
+    <h3>4.5 Refuge cities</h3>
+    <p>Places where the company could relocate if local conditions become untenable. Criteria include physical security, legal stability, infrastructure, the labor market, costs, and incentives.</p>
+
+    <div class="callout info">
+      <div class="callout-title">Key principle</div>
+      <p>The company does not wait until it needs a refuge city. <strong>It has already identified one, estimated costs, made initial contacts, and prepared a transition plan.</strong> When the IVR turns red, there is no time to start looking.</p>
+    </div>
+  </article>
+
+  <!-- CAPÍTULO 5 -->
+  <article class="chapter" id="cap5">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber5">Chapter 05</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🌐</span><h2 class="chapter-title" data-i18n="chapterTitle5">The Global Radar: the macroclimate of stability</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead5">Geopolitics, supply chains, and global events.</p>
+    </div>
+
+    <h3>5.1 International geopolitical tensions</h3>
+    <p>A war in Europe affects energy prices in South America. Sanctions on an Asian country affect supply chains. The world is an interconnected system.</p>
+
+    <h3>5.2 Disruptions to maritime routes</h3>
+    <p>The Red Sea, the Strait of Hormuz, the Suez Canal, and the Panama Canal: <strong>any disruption affects local businesses</strong>. Ship attacks, canal closures, port strikes, and international freight rates all matter.</p>
+
+    <h3>5.3 Global climate events</h3>
+    <p>A strong El Niño affects harvests on three continents. A hurricane in the Caribbean halts refineries. A drought in China affects electronic components.</p>
+
+    <h3>5.4 Sanctions and volatility</h3>
+    <p>Currency volatility, country risk, sectoral sanctions, and global economic cycles.</p>
+
+    <h3>5.5 Mapping opportunities</h3>
+    <p>The global radar looks beyond threats. It also <strong>maps opportunities</strong>: stable countries, growing regions, emerging markets, and free-trade agreements.</p>
+  </article>
+
+  <!-- CAPÍTULO 6 -->
+  <article class="chapter" id="cap6">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber6">Chapter 06</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">📊</span><h2 class="chapter-title" data-i18n="chapterTitle6">The algorithm of reality: the Viability and Risk Index</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead6">The corporate traffic light that shapes the future.</p>
+    </div>
+
+    <h3>6.1 Designing the IVR</h3>
+    <p>All the information from the local, national, and global radars must be translated into a <strong>number</strong>: the <strong>Viability and Risk Index (IVR)</strong>, a dashboard that weights variables on a weekly basis.</p>
+
+    <h3>6.2 IVR components</h3>
+    <table>
+      <thead>
+        <tr><th>Component</th><th>Weight</th><th>Variables</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Physical security</strong></td><td>40%</td><td>Violent crime, homicides, perceived insecurity, police response time</td></tr>
+        <tr><td><strong>Legal stability</strong></td><td>25%</td><td>Corruption, hostile laws, tax pressure, speed of justice</td></tr>
+        <tr><td><strong>Operational continuity</strong></td><td>20%</td><td>Service outages, extreme weather, outbreaks, routes, supplies</td></tr>
+        <tr><td><strong>Macro environment</strong></td><td>15%</td><td>Supply chains, inflation, volatility, geopolitics</td></tr>
+      </tbody>
+    </table>
+    <figure class="ivr-chart" id="ivr-chart" aria-labelledby="ivr-chart-title">
+      <h4 id="ivr-chart-title" data-i18n="chartTitle">IVR component weightings</h4>
+      <ul role="img" aria-label="IVR component weights">
+        <li><span data-i18n="weightSecurity">Physical security</span><span class="ivr-track"><span class="ivr-bar" style="--weight:100%"></span></span><span class="ivr-value">40%</span></li>
+        <li><span data-i18n="weightLegal">Legal stability</span><span class="ivr-track"><span class="ivr-bar" style="--weight:62.5%"></span></span><span class="ivr-value">25%</span></li>
+        <li><span data-i18n="weightOperations">Operational continuity</span><span class="ivr-track"><span class="ivr-bar" style="--weight:50%"></span></span><span class="ivr-value">20%</span></li>
+        <li><span data-i18n="weightMacro">Macro environment</span><span class="ivr-track"><span class="ivr-bar" style="--weight:37.5%"></span></span><span class="ivr-value">15%</span></li>
+      </ul>
+      <figcaption class="chapter-lead" data-i18n="chartCaption">Reference weights described in the model; they do not represent a real-time measurement.</figcaption>
+    </figure>
+
+    <h3>6.3 The corporate traffic light</h3>
+    <div class="semaforo">
+      <div class="semaforo-item verde">
+        <div class="luz"></div>
+        <h5>Green · 70–100</h5>
+        <p>Viable environment. Operate, invest, expand. Standard protocols.</p>
+      </div>
+      <div class="semaforo-item amarillo">
+        <div class="luz"></div>
+        <h5>Yellow · 40–69</h5>
+        <p>Deteriorating environment. Activate heightened duty-of-care protocols. Prepare an exit plan.</p>
+      </div>
+      <div class="semaforo-item rojo">
+        <div class="luz"></div>
+        <h5>Red · 0–39</h5>
+        <p>Unviable environment. <strong>Execute the exit protocol.</strong></p>
+      </div>
+    </div>
+
+    <h3>6.4 Decision thresholds</h3>
+    <ul>
+      <li><strong>IVR 70→60:</strong> review protocols.</li>
+      <li><strong>IVR 60→50:</strong> cuidado extremo.</li>
+      <li><strong>IVR 50→40:</strong> contingencia territorial.</li>
+      <li><strong>IVR 40→30:</strong> actively explore refuge cities.</li>
+      <li><strong>IVR 30→20:</strong> relocation plan.</li>
+      <li><strong>IVR &lt;20:</strong> immediate exit.</li>
+    </ul>
+
+    <h3>6.5 The IVR as a living system</h3>
+    <p>It is updated as often as reality demands: daily (incidents, weather), weekly (politics, laws), monthly (rankings, geopolitics), and quarterly (comprehensive review).</p>
+  </article>
+
+  <!-- CAPÍTULO 7 -->
+  <article class="chapter" id="cap7">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber7">Chapter 07</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🛡️</span><h2 class="chapter-title" data-i18n="chapterTitle7">The duty of care: the company as protector</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead7">The team, protocols, and loyalty.</p>
+    </div>
+
+    <h3>7.1 The state’s failure</h3>
+    <p>When the state fails in its basic duty to provide security, <strong>organizations with resources, operational capacity, and responsibility for their people fill the void</strong>. The company assumes a duty of care for its team.</p>
+
+    <h3>7.2 Comprehensive security as the paramount benefit</h3>
+    <p>In a hostile environment, security matters more than salary. An employee may prefer to earn 15% less and know that the company protects them.</p>
+
+    <h3>7.3 Protocols by audience</h3>
+    <h4>For employees</h4>
+    <p>Safe routes, staggered schedules, 24/7 communication, training, and enhanced insurance.</p>
+    <h4>For customers</h4>
+    <p>Monitored parking, trained staff, and evacuation protocols.</p>
+    <h4>For suppliers</h4>
+    <p>Safe delivery windows, monitored meeting points, and logistics contingencies.</p>
+
+    <h3>7.4 Loyalty as a return</h3>
+    <p>A company that protects its people builds <strong>loyalty, talent retention, productivity, and a strong reputation</strong>.</p>
+
+    <h3>7.5 Business ethics</h3>
+    <div class="callout warning">
+      <div class="callout-title">Unbreakable rule</div>
+      <p><strong>No asset is worth more than a human life.</strong> If robbed, do not resist. If threatened, evacuate. In the face of extreme risk, leave. Assets can be recovered. Lives cannot.</p>
+    </div>
+  </article>
+
+  <!-- CAPÍTULO 8 -->
+  <article class="chapter" id="cap8">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber8">Chapter 08</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🧭</span><h2 class="chapter-title" data-i18n="chapterTitle8">The ultimate sanction: relocation as a vote with your feet</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead8">The message to a failed state.</p>
+    </div>
+
+    <h3>8.1 The exit protocol</h3>
+    <p>When the IVR stays in the red for more than 60 days, or an extreme event drives it below 20, the protocol is activated. This is not a flight. It is a <strong>strategic relocation</strong>: a refuge city, incentives, asset transfer, communications, and operational continuity.</p>
+
+    <h3>8.2 The company as an economic engine</h3>
+    <p>A company creates jobs, pays taxes, buys from local suppliers, and attracts spending. When it leaves, it takes all of that with it. The city enters a <strong>vicious cycle</strong>.</p>
+
+    <h3>8.3 Strategic relocation</h3>
+    <p>A company that leaves in panic loses. A company that leaves with a plan <strong>wins twice</strong>: it leaves an unviable environment and arrives in a viable one with the advantage of being early.</p>
+
+    <h3>8.4 A message to the political class</h3>
+    <blockquote>If you cannot guarantee the safety of families, social peace, and the rule of law, you will be left alone to govern the ruins.</blockquote>
+
+    <h3>8.5 Case studies</h3>
+    <p>History is full of companies that left cities controlled by drug trafficking or countries in institutional collapse and prospered by anticipating trends. These are not anecdotes. They are <strong>evidence that strategic relocation is a proven survival tool</strong>.</p>
+  </article>
+
+  <!-- CAPÍTULO 9 -->
+  <article class="chapter" id="cap9">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber9">Chapter 09</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🧰</span><h2 class="chapter-title" data-i18n="chapterTitle9">Practical implementation: building your Radar</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead9">Tools, observer networks, and training.</p>
+    </div>
+
+    <h3>9.1 Low-cost tools</h3>
+    <ul>
+      <li><strong>Google Alerts</strong> for local keywords.</li>
+      <li><strong>RSS feeds</strong> from local and police news sources.</li>
+      <li><strong>WhatsApp groups</strong> for neighborhoods and industries.</li>
+      <li><strong>Twitter/X Lists</strong> of journalists and officials.</li>
+      <li><strong>Scraping platforms</strong> or in-house development with Python.</li>
+      <li><strong>Free dashboards</strong>: Google Data Studio, Power BI.</li>
+      <li><strong>Public APIs</strong>: weather, transportation, and government data.</li>
+    </ul>
+
+    <h3>9.2 The observer network</h3>
+    <p>Employees, suppliers, and residents act as sensors. Set up an internal reporting channel. Partner with neighbors and chambers of commerce. The network must be <strong>trained</strong> in what to observe, how to report, and which data matter.</p>
+
+    <h3>9.3 Scraping news and social media</h3>
+    <p>Automated extraction of information from public sources: local news, social media, official sources, and police radio. Centralize it in a <strong>dashboard</strong> that displays trends and alerts.</p>
+
+    <h3>9.4 Data integration</h3>
+    <p>A central database, APIs, dashboards, and automatic alerts when an indicator crosses a threshold.</p>
+
+    <h3>9.5 Training the team</h3>
+    <p>Technology without training is useless. The company must teach its team to:</p>
+    <ul>
+      <li><strong>Observe:</strong> what to look for and how to detect weak signals.</li>
+      <li><strong>Record:</strong> using what format, frequency, and evidence.</li>
+      <li><strong>Cross-reference:</strong> how to connect scattered data.</li>
+      <li><strong>Think:</strong> formulate hypotheses and identify patterns.</li>
+      <li><strong>Project:</strong> what will happen if the trend continues.</li>
+      <li><strong>Develop protocols:</strong> turn analysis into action.</li>
+      <li><strong>Communicate:</strong> translate data into language decision-makers understand.</li>
+    </ul>
+
+    <div class="callout success">
+      <div class="callout-title">Culture, not a course</div>
+      <p>This training is not a course. It is a <strong>culture</strong>. A hyperconnected company is a company that thinks.</p>
+    </div>
+  </article>
+
+  <!-- CAPÍTULO 10 -->
+  <article class="chapter" id="cap10">
+    <div class="chapter-header">
+      <div class="chapter-number" data-i18n="chapterNumber10">Chapter 10</div>
+      <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">✨</span><h2 class="chapter-title" data-i18n="chapterTitle10">Conclusion: the power to choose and the tragedy of the absurd</h2></div>
+      <p class="chapter-lead" data-i18n="chapterLead10">Where there is no security, there is no future.</p>
+    </div>
+
+    <h3>10.1 Businesses as the only entities with strategic mobility</h3>
+    <p>Ordinary citizens, honest workers, and families trying to get ahead are <strong>trapped</strong>. They lack the capital mobility, structural flexibility, and resources to move away overnight. <strong>Businesses do not.</strong></p>
+
+    <h3>10.2 Political responsibility</h3>
+    <p>When a city collapses, crime multiplies, and families are ruined, <strong>someone is responsible</strong>. Politicians who deny reality and those who make empty promises at committees and summits without taking action are <strong>complicit</strong>—complicit in every innocent life cut short, every family ruined, and every talented person who leaves.</p>
+
+    <h3>10.3 No employee wants tragedy over a pair of shoes</h3>
+    <blockquote>No employee wants to suffer a tragedy just so someone can steal their sneakers.</blockquote>
+    <p>No customer wants to suffer trauma just to buy a product. No supplier wants to risk their life to deliver goods. Human life and peace of mind <strong>are not acceptable sacrifices</strong> in the production process.</p>
+
+    <h3>10.4 The final manifesto</h3>
+    <div class="callout warning">
+      <div class="callout-title">Manifesto</div>
+      <p><strong>Where there is no security, there is no future.</strong></p>
+      <p>Where the state has failed, business must step up. Where politics has lied, data must speak. Where fear has paralyzed, intelligence must decide.</p>
+    </div>
+
+    <h3>10.5 The hyperconnected company chooses the future</h3>
+    <p>The hyperconnected company does not sit and wait for disaster. It records, analyzes, protects its people, and, if necessary, <strong>packs up and moves to a place where work and life can once again rise above fear</strong>.</p>
+
+    <p>For the sake of survival and ethics, businesses must choose the future.</p>
+
+    <p>And that future is not built with speeches. It is built with data, protocols, and decisions—with the courage to record what is happening, think about it without filters, and act before it is too late.</p>
+
+    <p style="text-align:center; font-size:1.3rem; font-style:italic; color:var(--accent); margin-top:3rem;"><strong>The more eyes there are recording events, the better a company can make decisions before it is too late.</strong></p>
+
+    <p style="text-align:center; color:var(--muted);">That is the promise of hyperconnectivity.<br>That is the responsibility of the modern company.<br>That is the only way for life, work, and dignity to rise above fear once again.</p>
+  </article>
+
+</main>
+
+<a href="#indice" class="back-top" title="Back to contents" data-i18n-title="backToContents">↑</a>
+
+<footer>
+  <p><strong>The Corporate Radar</strong> · <span data-i18n="footerEdition">2026 Edition</span></p>
+  <p data-i18n="footerSubtitle">Hyperconnectivity, Security, and the New Mandate for Business Survival</p>
+</footer>
+
+<script>
+  const translations = {
+    en: {
+      documentTitle: "The Corporate Radar — Hyperconnectivity, Security, and Business Survival",
+      eyebrow: "Corporate Essay · 2026 Edition",
+      subtitle: "Hyperconnectivity, Security, and the New Mandate for Business Survival",
+      extended: "Read the extended edition",
+      meta: "A guide to risk intelligence · Duty of care · Strategic relocation",
+      searchLabel: "Search the book",
+      searchPlaceholder: "Enter a word or phrase",
+      languageLabel: "Edition language",
+      skipContent: "Skip to content",
+      chapterIndex: "Chapter index",
+      backToContents: "Back to contents",
+      footerEdition: "2026 Edition",
+      footerSubtitle: "Hyperconnectivity, Security, and the New Mandate for Business Survival",
+      install: "Install app",
+      contents: "Contents",
+      chartTitle: "IVR component weightings",
+      chartCaption: "Reference weights described in the model; they do not represent a real-time measurement.",
+      weightSecurity: "Physical security",
+      weightLegal: "Legal stability",
+      weightOperations: "Operational continuity",
+      weightMacro: "Macro environment",
+      searchNoResults: "No matches found.",
+      searchResults: "matches",
+      languageNote: "This is the complete English translation of the essay.",
+      chapter: "Chapter",
+      toc: [
+        ["Introduction", "From climate threat to total risk"],
+        ["The theory of hyperconnectivity applied to survival", "From fragmented information to integrated intelligence"],
+        ["The Local Radar: the microclimate of insecurity", "Crime, climate, health, and local politics"],
+        ["The National Radar: identifying safe havens", "Rankings, laws, and refuge cities"],
+        ["The Global Radar: the macroclimate of stability", "Geopolitics, supply chains, and global events"],
+        ["The algorithm of reality: the Viability and Risk Index", "The corporate traffic light that shapes the future"],
+        ["The duty of care: the company as protector", "The team, protocols, and loyalty"],
+        ["The ultimate sanction: relocation as a vote with your feet", "The message to a failed state"],
+        ["Practical implementation: building your Radar", "Tools, observer networks, and training"],
+        ["Conclusion: the power to choose and the tragedy of the absurd", "Where there is no security, there is no future"]
+      ]
+    }
+  };
+
+  const languagePicker = document.querySelector("#language");
+  const searchInput = document.querySelector("#book-search");
+  const searchStatus = document.querySelector("#search-status");
+  let currentLanguage = "en";
+  let currentMatch = -1;
+
+  function setLanguage(language) {
+    const copy = translations[language];
+    currentLanguage = language;
+    document.documentElement.lang = language === "pt-BR" ? "pt-BR" : language;
+    document.title = copy.documentTitle;
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+      const translation = copy[element.dataset.i18n];
+      if (translation !== undefined) element.textContent = translation;
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+      const translation = copy[element.dataset.i18nPlaceholder];
+      if (translation !== undefined) element.placeholder = translation;
+    });
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+      const translation = copy[element.dataset.i18nAriaLabel];
+      if (translation !== undefined) element.setAttribute("aria-label", translation);
+    });
+    document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+      const translation = copy[element.dataset.i18nTitle];
+      if (translation !== undefined) element.title = translation;
+    });
+    copy.toc.forEach(([title, description], index) => {
+      const chapter = index + 1;
+      document.querySelector(`[data-i18n="toc${chapter}"]`).textContent = title;
+      document.querySelector(`[data-i18n="desc${chapter}"]`).textContent = description;
+      document.querySelector(`[data-i18n="chapterTitle${chapter}"]`).textContent = title;
+      document.querySelector(`[data-i18n="chapterNumber${chapter}"]`).textContent =
+        `${copy.chapter} ${String(chapter).padStart(2, "0")}`;
+      document.querySelector(`[data-i18n="chapterLead${chapter}"]`).textContent = description;
+    });
+    refreshSearch();
+  }
+
+  function fold(value) {
+    return value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase();
+  }
+
+  function clearSearchMarks() {
+    document.querySelectorAll("mark.search-match").forEach((mark) => {
+      mark.replaceWith(document.createTextNode(mark.textContent));
+    });
+  }
+
+  function refreshSearch() {
+    clearSearchMarks();
+    currentMatch = -1;
+    const query = fold(searchInput.value.trim());
+    if (!query) {
+      searchStatus.textContent = "";
+      return;
+    }
+
+    const root = document.querySelector("main");
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.parentElement.closest("script, style, mark, .chapter-icon")
+          ? NodeFilter.FILTER_REJECT
+          : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    const matches = [];
+
+    textNodes.forEach((node) => {
+      const text = node.nodeValue;
+      const foldedCharacters = [];
+      const originalStarts = [];
+      const originalEnds = [];
+      let originalIndex = 0;
+
+      for (const character of text) {
+        const normalized = fold(character);
+        for (const foldedCharacter of normalized) {
+          for (let offset = 0; offset < foldedCharacter.length; offset += 1) {
+            foldedCharacters.push(foldedCharacter[offset]);
+            originalStarts.push(originalIndex);
+            originalEnds.push(originalIndex + character.length);
+          }
+        }
+        originalIndex += character.length;
+      }
+
+      const foldedText = foldedCharacters.join("");
+      const fragments = document.createDocumentFragment();
+      let cursor = 0;
+      let matchIndex = foldedText.indexOf(query);
+      while (matchIndex !== -1) {
+        const start = originalStarts[matchIndex];
+        const end = originalEnds[matchIndex + query.length - 1];
+        if (start >= cursor && end !== undefined) {
+          fragments.append(document.createTextNode(text.slice(cursor, start)));
+          const mark = document.createElement("mark");
+          mark.className = "search-match";
+          mark.textContent = text.slice(start, end);
+          fragments.append(mark);
+          matches.push(mark);
+          cursor = end;
+        }
+        matchIndex = foldedText.indexOf(query, matchIndex + query.length);
+      }
+
+      if (matches.length && cursor > 0) {
+        fragments.append(document.createTextNode(text.slice(cursor)));
+        node.replaceWith(fragments);
+      }
+    });
+
+    if (matches.length) {
+      searchStatus.textContent = `${matches.length} ${translations[currentLanguage].searchResults}.`;
+      matches[0].classList.add("current");
+      currentMatch = 0;
+    } else {
+      searchStatus.textContent = translations[currentLanguage].searchNoResults;
+    }
+  }
+
+  searchInput.addEventListener("input", refreshSearch);
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      searchInput.value = "";
+      refreshSearch();
+    } else if (event.key === "Enter") {
+      const matches = document.querySelectorAll("mark.search-match");
+      if (matches.length) {
+        matches[currentMatch]?.classList.remove("current");
+        currentMatch = (currentMatch + 1) % matches.length;
+        matches[currentMatch].classList.add("current");
+        matches[currentMatch].scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "center"
+        });
+      }
+    }
+  });
+  setLanguage("en");
+  languagePicker.addEventListener("change", () => { window.location.href = languagePicker.value; });
+
+  const chart = document.querySelector("#ivr-chart");
+  if ("IntersectionObserver" in window) {
+    const chartObserver = new IntersectionObserver((entries, observer) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        chart.classList.add("is-visible");
+        observer.disconnect();
+      }
+    }, { threshold: 0.25 });
+    chartObserver.observe(chart);
+  } else {
+    chart.classList.add("is-visible");
+  }
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js")
+      .catch((error) => console.error("Could not register the service worker:", error));
+  }
+
+  let installPrompt;
+  const installButton = document.querySelector("#install-app");
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    installPrompt = event;
+    installButton.hidden = false;
+  });
+  installButton.addEventListener("click", async () => {
+    if (!installPrompt) return;
+    try {
+      await installPrompt.prompt();
+    } catch (error) {
+      console.error("Could not start app installation:", error);
+    } finally {
+      installPrompt = null;
+      installButton.hidden = true;
+    }
+  });
+  window.addEventListener("appinstalled", () => {
+    installButton.hidden = true;
+    installPrompt = null;
+  });
+</script>
+</body>
+</html>

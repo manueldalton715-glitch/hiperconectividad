@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Radar Corporativo — Hiperconectividade, Segurança e Sobrevivência Empresarial</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --bg:#faf8f3; --text:#1a1a1a; --accent:#8b0000; --accent-2:#c9a961; --muted:#666; --border:#e0dcd0; --card:#fff; --shadow:0 2px 12px rgba(0,0,0,.06); --green:#2d7a3e; --yellow:#d4a017; --red:#a02020; }
+@media (prefers-color-scheme:dark) { :root { --bg:#141414; --text:#e8e6e1; --accent:#d94545; --accent-2:#c9a961; --muted:#999; --border:#2a2a2a; --card:#1c1c1c; --shadow:0 2px 12px rgba(0,0,0,.4); } }
+html { scroll-behavior:smooth; }
+body { font-family:Georgia,Charter,"Iowan Old Style",serif; background:var(--bg); color:var(--text); line-height:1.75; font-size:18px; -webkit-font-smoothing:antialiased; }
+.skip-link { position:fixed; top:1rem; left:1rem; z-index:200; padding:.75rem 1rem; background:var(--card); color:var(--text); transform:translateY(-200%); }
+.skip-link:focus { transform:translateY(0); }
+.cover { min-height:100vh; background:linear-gradient(135deg,#1a1a1a 0%,#3a1a1a 50%,#1a1a1a 100%); color:#f5f0e6; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:4rem 2rem; position:relative; overflow:hidden; }
+.cover::before { content:""; position:absolute; inset:0; background-image:radial-gradient(circle at 20% 30%,rgba(201,169,97,.15) 0%,transparent 40%),radial-gradient(circle at 80% 70%,rgba(139,0,0,.2) 0%,transparent 40%); pointer-events:none; }
+.cover-content { position:relative; z-index:1; max-width:800px; }
+.eyebrow,.meta,.chapter-number,.reader-tools,.callout-title,th,footer { font-family:Helvetica,Arial,sans-serif; }
+.cover .eyebrow { letter-spacing:.4em; text-transform:uppercase; font-size:.85rem; color:var(--accent-2); margin-bottom:2rem; }
+.cover h1 { font-size:clamp(2.5rem,6vw,4.5rem); font-weight:700; line-height:1.1; margin-bottom:1.5rem; letter-spacing:-.02em; }
+.cover .subtitle { font-size:clamp(1.1rem,2vw,1.4rem); font-style:italic; color:#c9c4b8; margin-bottom:3rem; font-weight:300; }
+.cover .meta { font-size:.85rem; letter-spacing:.2em; text-transform:uppercase; color:#888; border-top:1px solid rgba(201,169,97,.3); padding-top:2rem; margin-top:2rem; }
+.edition-link { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:.75rem 1.25rem; border:1px solid var(--accent-2); border-radius:4px; color:#f5f0e6; font:700 .95rem Helvetica,Arial,sans-serif; text-decoration:none; transition:background .2s,color .2s; }
+.edition-link:hover { background:var(--accent-2); color:#1a1a1a; }
+.edition-link:focus-visible { outline:3px solid #f5f0e6; outline-offset:4px; }
+.reader-tools { max-width:900px; margin:0 auto; padding:2rem 2rem; display:grid; grid-template-columns:minmax(12rem,1fr) auto auto; align-items:end; gap:1rem; }
+.reader-tools label { display:block; margin-bottom:.35rem; font-size:.85rem; font-weight:700; }
+.reader-tools input,.reader-tools select,.reader-tools button { min-height:46px; padding:.65rem .8rem; border:1px solid var(--border); border-radius:4px; background:var(--card); color:var(--text); font:inherit; }
+.reader-tools input { width:100%; } .reader-tools button { cursor:pointer; } .reader-tools button:hover { border-color:var(--accent); }
+.reader-tools input:focus-visible,.reader-tools select:focus-visible,.reader-tools button:focus-visible { outline:3px solid var(--accent-2); outline-offset:2px; }
+.search-status,.language-note { grid-column:1/-1; margin:0; color:var(--muted); font-size:.85rem; min-height:1.4em; }
+.language-note { font-size:.8rem; } mark.search-match { background:#ffe08a; color:#1a1a1a; border-radius:2px; } mark.search-match.current { outline:2px solid var(--accent); }
+.toc { max-width:900px; margin:0 auto; padding:4rem 2rem; }
+.toc h2 { font-size:2rem; margin-bottom:2rem; color:var(--accent); border-bottom:2px solid var(--accent-2); padding-bottom:.5rem; }
+.toc ol { list-style:none; counter-reset:chapter; } .toc li { counter-increment:chapter; padding:.8rem 0; border-bottom:1px solid var(--border); transition:all .2s; }
+.toc li:hover { padding-left:.5rem; background:rgba(201,169,97,.08); } .toc li::before { content:counter(chapter,decimal-leading-zero); color:var(--accent-2); font:700 .9rem Helvetica,Arial,sans-serif; margin-right:1rem; }
+.toc a { color:var(--text); text-decoration:none; font-weight:500; } .toc a:hover { color:var(--accent); } .toc .desc { display:block; font-size:.9rem; color:var(--muted); font-style:italic; margin:.2rem 0 0 2.5rem; }
+main { max-width:780px; margin:0 auto; padding:2rem 2rem 6rem; } article.chapter { margin-bottom:5rem; scroll-margin-top:2rem; }
+.chapter-header { border-top:3px double var(--accent); padding-top:2rem; margin-bottom:3rem; }
+.chapter-number { color:var(--accent-2); letter-spacing:.3em; text-transform:uppercase; font-size:.85rem; font-weight:700; margin-bottom:.5rem; }
+.chapter-heading-row { display:flex; align-items:center; gap:.8rem; } .chapter-icon { flex:0 0 auto; display:grid; width:3rem; height:3rem; place-items:center; border:1px solid var(--border); border-radius:50%; background:var(--card); font-size:1.5rem; }
+h2.chapter-title { font-size:clamp(1.8rem,4vw,2.5rem); line-height:1.2; color:var(--accent); margin-bottom:.5rem; font-weight:700; }
+.chapter-lead { font-style:italic; color:var(--muted); font-size:1.1rem; border-left:3px solid var(--accent-2); padding-left:1.2rem; margin-top:1rem; }
+h3 { font-size:1.4rem; color:var(--text); margin:2.5rem 0 1rem; padding-bottom:.3rem; border-bottom:1px solid var(--border); }
+h4 { font-size:1.15rem; color:var(--accent); margin:1.8rem 0 .8rem; font-weight:700; } p { margin-bottom:1.2rem; }
+strong { color:var(--text); font-weight:700; } em { color:var(--accent); font-style:italic; } ul,ol { margin:1rem 0 1.5rem 1.5rem; } li { margin-bottom:.5rem; }
+.callout { background:var(--card); border-left:4px solid var(--accent-2); padding:1.5rem 1.8rem; margin:2rem 0; border-radius:0 8px 8px 0; box-shadow:var(--shadow); }
+.callout.warning { border-left-color:var(--red); } .callout.success { border-left-color:var(--green); } .callout.info { border-left-color:var(--accent-2); }
+.callout-title { font-weight:700; text-transform:uppercase; font-size:.8rem; letter-spacing:.15em; color:var(--accent); margin-bottom:.5rem; }
+blockquote { font-size:1.3rem; font-style:italic; color:var(--muted); border-left:4px solid var(--accent); padding:1rem 1.5rem; margin:2rem 0; line-height:1.5; }
+blockquote::before { content:'"'; font-size:3rem; color:var(--accent-2); line-height:0; vertical-align:-.5rem; margin-right:.3rem; }
+.semaforo { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin:2rem 0; }
+.semaforo-item { padding:1.5rem; border-radius:10px; color:white; box-shadow:var(--shadow); }
+.semaforo-item.verde { background:linear-gradient(135deg,#2d7a3e,#1f5a2c); } .semaforo-item.amarillo { background:linear-gradient(135deg,#d4a017,#a67c00); } .semaforo-item.rojo { background:linear-gradient(135deg,#a02020,#6b1515); }
+.semaforo-item .luz { width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.9); margin-bottom:.8rem; box-shadow:0 0 20px rgba(255,255,255,.5); }
+.semaforo-item h5 { font-size:1.1rem; margin-bottom:.5rem; font-family:Helvetica,Arial,sans-serif; } .semaforo-item p { font-size:.95rem; margin:0; line-height:1.5; }
+table { width:100%; border-collapse:collapse; margin:2rem 0; font-size:.95rem; background:var(--card); box-shadow:var(--shadow); border-radius:8px; overflow:hidden; }
+.ivr-chart { margin:2rem 0; padding:1.5rem; border:1px solid var(--border); border-radius:10px; background:var(--card); box-shadow:var(--shadow); }
+.ivr-chart h4 { margin-top:0; } .ivr-chart ul { list-style:none; margin:1rem 0 0; padding:0; }
+.ivr-chart li { display:grid; grid-template-columns:minmax(9rem,1fr) 3fr 3rem; align-items:center; gap:.8rem; margin:.8rem 0; }
+.ivr-track { height:.9rem; overflow:hidden; border-radius:99px; background:var(--border); }
+.ivr-bar { display:block; width:var(--weight); height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--accent),var(--accent-2)); transform:scaleX(0); transform-origin:left; }
+.ivr-chart.is-visible .ivr-bar { animation:grow-bar 900ms cubic-bezier(.2,.7,.2,1) forwards; }
+.ivr-chart li:nth-child(2) .ivr-bar { animation-delay:100ms; } .ivr-chart li:nth-child(3) .ivr-bar { animation-delay:200ms; } .ivr-chart li:nth-child(4) .ivr-bar { animation-delay:300ms; }
+.ivr-value { font:700 1rem Helvetica,Arial,sans-serif; text-align:right; } @keyframes grow-bar { to { transform:scaleX(1); } }
+th { background:var(--accent); color:white; padding:1rem; text-align:left; font-weight:700; letter-spacing:.05em; text-transform:uppercase; font-size:.8rem; }
+td { padding:.9rem 1rem; border-bottom:1px solid var(--border); } tr:last-child td { border-bottom:none; } tr:hover { background:rgba(201,169,97,.05); }
+.back-top { position:fixed; bottom:2rem; right:2rem; background:var(--accent); color:white; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,.2); transition:transform .2s; z-index:100; }
+.back-top:hover { transform:translateY(-3px); }
+footer { background:#1a1a1a; color:#888; text-align:center; padding:3rem 2rem; font-size:.85rem; letter-spacing:.1em; } footer strong { color:var(--accent-2); }
+@media (max-width:640px) {
+ body { font-size:17px; } main,.toc { padding:1.5rem 1.2rem; } .cover { padding:3rem 1.5rem; } blockquote { font-size:1.1rem; }
+ .back-top { width:42px; height:42px; bottom:1rem; right:1rem; } .reader-tools { grid-template-columns:1fr 1fr; padding:1.5rem 1.2rem; }
+ .reader-tools .search-field { grid-column:1/-1; } .reader-tools button { width:100%; } .chapter-icon { width:2.5rem; height:2.5rem; font-size:1.25rem; }
+ table { display:block; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; } .ivr-chart { padding:1rem; }
+ .ivr-chart li { grid-template-columns:minmax(7rem,1fr) 2fr 2.5rem; gap:.5rem; font-size:.88rem; }
+}
+@media print { .back-top,.cover::before,.reader-tools,.skip-link { display:none; } body { font-size:11pt; color:black; background:white; } article.chapter { page-break-before:always; } .cover { min-height:auto; background:white; color:black; page-break-after:always; } a { color:black; text-decoration:none; } }
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#241b18">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Pular para o conteúdo</a>
+<header class="cover">
+  <div class="cover-content">
+    <div class="eyebrow">Ensaio corporativo · Edição 2026</div>
+    <h1>O Radar Corporativo</h1>
+    <p class="subtitle">Hiperconectividade, segurança e o novo imperativo de sobrevivência empresarial</p>
+    <a class="edition-link" href="radar-corporativo-ampliado.pt-br.html">Leia a versão ampliada</a>
+    <div class="meta">Guia de inteligência de riscos · Dever de cuidado · Realocação estratégica</div>
+  </div>
+</header>
+<section class="reader-tools" aria-label="Ferramentas de leitura">
+  <div class="search-field">
+    <label for="book-search">Buscar no livro</label>
+    <input id="book-search" type="search" placeholder="Digite uma palavra ou expressão" autocomplete="off">
+  </div>
+  <div>
+    <label for="language">Idioma da interface</label>
+    <select id="language" aria-label="Idioma da interface">
+      <option value="es">Espanhol</option>
+      <option value="en">Inglês</option>
+      <option value="pt-BR" selected>Português (Brasil)</option>
+    </select>
+  </div>
+  <button id="install-app" type="button" hidden>Instalar aplicativo</button>
+  <p class="search-status" id="search-status" role="status" aria-live="polite"></p>
+  <p class="language-note">Esta edição está integralmente em português brasileiro. O IVR mantém o acrônimo do original.</p>
+</section>
+<nav class="toc" id="indice" aria-label="Sumário de capítulos">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#cap1">Introdução</a><span class="desc">Da ameaça climática ao risco total</span></li>
+    <li><a href="#cap2">A teoria da hiperconectividade aplicada à sobrevivência</a><span class="desc">Da informação fragmentada à inteligência integrada</span></li>
+    <li><a href="#cap3">O Radar Local: o microclima da insegurança</a><span class="desc">Crime, clima, saúde e política de proximidade</span></li>
+    <li><a href="#cap4">O Radar Nacional: identificando refúgios seguros</a><span class="desc">Rankings, leis e cidades-refúgio</span></li>
+    <li><a href="#cap5">O Radar Global: o macroclima da estabilidade</a><span class="desc">Geopolítica, cadeias de suprimentos e eventos globais</span></li>
+    <li><a href="#cap6">O algoritmo da realidade: o Índice de Viabilidade e Risco</a><span class="desc">O semáforo corporativo que decide o futuro</span></li>
+    <li><a href="#cap7">O dever de cuidado: a empresa como protetora</a><span class="desc">A equipe, os protocolos e a lealdade</span></li>
+    <li><a href="#cap8">A sanção definitiva: a realocação como voto com os pés</a><span class="desc">A mensagem ao Estado falido</span></li>
+    <li><a href="#cap9">Implementação prática: construindo seu Radar</a><span class="desc">Ferramentas, rede de observadores e capacitação</span></li>
+    <li><a href="#cap10">Conclusão: o poder de decidir e a tragédia do absurdo</a><span class="desc">Onde não há segurança, não há futuro</span></li>
+  </ol>
+</nav>
+<main id="contenido">
+<article class="chapter" id="cap1">
+  <div class="chapter-header">
+    <div class="chapter-number">Capítulo 01</div>
+    <div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">📖</span><h2 class="chapter-title">Introdução</h2></div>
+    <p class="chapter-lead">Da ameaça climática ao risco total: por que as empresas precisam despertar.</p>
+  </div>
+  <p>Em nossa obra anterior, <em>Divisão de Monitoramento Climático e Fenômenos Meteorológicos (DSCFM)</em>, estabelecemos uma premissa fundamental: <strong>a mudança climática é um multiplicador transversal de riscos</strong> que atravessa todas as dimensões da vida social, produtiva e ecológica; e que a única forma de sobreviver e prosperar é por meio do registro sistemático, do cruzamento de dados, da criação de protocolos próprios e do ensino do monitoramento como condição para a adaptação.</p>
+  <p>Demonstramos que a informação existe, mas está fragmentada, descontextualizada e desconectada da tomada de decisões. Ninguém conecta os pontos entre a temperatura e o fungo, a seca e a fome, a inundação e o surto de cólera. E a solução não é apenas monitorar, mas <strong>ensinar a monitorar, ensinar a pensar a partir dos registros e ensinar a criar protocolos próprios</strong>.</p>
+  <p>Hoje, esse mesmo raciocínio precisa dar um passo lógico e urgente em direção a uma ameaça tão letal, cotidiana e sistêmica quanto: <strong>a insegurança, a instabilidade institucional, o colapso do tecido social e a ruptura do contrato básico entre o Estado e seus cidadãos: a garantia de que se pode caminhar pela rua sem medo.</strong></p>
+  <p>Vivemos na era da <strong>hiperconectividade</strong>. A informação existe, é abundante e circula em tempo real. Cada crime, cada protesto, cada projeto de lei em análise, cada conflito geopolítico, cada fenômeno climático extremo deixa um rastro digital que pode ser registrado, cruzado e analisado. Ainda assim, as empresas continuam operando às cegas.</p>
+  <div class="callout warning"><div class="callout-title">Premissa central</div><p>A empresa moderna não pode ser apenas uma entidade econômica; precisa se tornar um <strong>organismo inteligente, hiperconectado e consciente do território</strong>.</p></div>
+  <p>A premissa é simples: <strong>quanto mais pares de olhos estiverem registrando os acontecimentos, melhor a empresa poderá tomar decisões antes que seja tarde</strong>. Não se trata de espionar, mas de estar atento. Trata-se de detectar sinais fracos antes que se transformem em crises. Trata-se de transformar o medo em dados e os dados em poder de decisão.</p>
+  <blockquote>Nenhum funcionário quer passar por uma tragédia para que roubem seu tênis.</blockquote>
+  <p>Porque os cidadãos comuns, os trabalhadores honestos, as famílias que buscam progredir estão presos em territórios abandonados pelo Estado. Não têm a mobilidade de capital nem a flexibilidade estrutural para emigrar de um dia para o outro. <strong>Mas as empresas têm.</strong></p>
+  <p>As empresas são as únicas entidades com capacidade logística, financeira e operacional para decidir se ficam ou vão embora. Têm o poder de traçar um radar, ler a realidade sem filtros políticos, calcular o risco e executar um movimento estratégico para salvar as pessoas que trabalham com elas.</p>
+  <p>Este livro é um guia para construir esse radar. Para implementar essa hiperconectividade. Para exercer esse dever de cuidado. Para tomar a decisão de realocação quando necessário.</p>
+  <p><strong>Porque onde não há segurança, não há futuro. E a empresa, por sobrevivência e por ética, precisa escolher o futuro.</strong></p>
+</article>
+<article class="chapter" id="cap2">
+  <div class="chapter-header"><div class="chapter-number">Capítulo 02</div><div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">👁️</span><h2 class="chapter-title">A teoria da hiperconectividade aplicada à sobrevivência</h2></div><p class="chapter-lead">Da informação fragmentada à inteligência integrada.</p></div>
+  <h3>2.1 O que é hiperconectividade empresarial</h3>
+  <p>Hiperconectividade não é ter presença nas redes sociais nem enviar e-mails em massa. É uma <strong>condição operacional</strong>: a capacidade de uma organização tecer uma rede de sensores invisíveis que escutem o pulso do território, do mercado, do clima político e do tecido social em tempo real.</p>
+  <p>No século XX, a empresa operava com informações filtradas: o jornal de segunda-feira, o relatório mensal do contador, a ligação do gerente de logística quando já era tarde. No século XXI, essa empresa está cega. A hiperconectividade empresarial é a resposta a essa cegueira.</p>
+  <h3>2.2 Da informação fragmentada à inteligência integrada</h3>
+  <p>O problema não é a falta de informação. É a <strong>fragmentação</strong>.</p>
+  <ul><li>O jornal local noticia um assalto, mas não cruza a informação com a queda de energia na região.</li><li>A polícia publica estatísticas trimestrais, mas não alerta sobre a tendência semanal.</li><li>O fornecedor avisa que não pode entregar, mas não explica que a rota está bloqueada por um protesto.</li></ul>
+  <p><strong>Ninguém conecta os pontos.</strong> Inteligência integrada é o processo de coletar informações dispersas, contextualizá-las, cruzá-las com outras variáveis e transformá-las em decisões operacionais.</p>
+  <h3>2.3 O princípio dos “pares de olhos”</h3>
+  <p>Uma empresa não pode depender de um único canal de informação. Precisa de <strong>múltiplos pares de olhos registrando, de vários ângulos, em tempo real</strong>:</p>
+  <ul><li><strong>Funcionários</strong> que relatam o que veem em seus bairros e trajetos.</li><li><strong>Fornecedores</strong> que alertam sobre interrupções e atrasos.</li><li><strong>Clientes</strong> que comentam a sensação de insegurança.</li><li><strong>Sensores digitais</strong>: coleta automatizada de notícias, grupos de bairro, rádios policiais.</li><li><strong>Dados oficiais</strong>: estatísticas, projetos de lei, boletins.</li><li><strong>Observadores comunitários</strong>: moradores, comerciantes, lideranças de bairro.</li></ul>
+  <div class="callout success"><div class="callout-title">Sinais fracos</div><p>Quando 30 pares de olhos relatam o mesmo sinal fraco, ele deixa de ser uma anedota e se transforma em <strong>tendência</strong>. E a tendência, detectada a tempo, é a diferença entre a prevenção e a tragédia.</p></div>
+  <h3>2.4 Velocidade corporativa versus lentidão burocrática</h3>
+  <p>O Estado opera no tempo político. A empresa precisa operar no tempo das operações. A hiperconectividade dá à empresa uma <strong>vantagem de sobrevivência</strong>: enquanto a prefeitura debate se deve aumentar o patrulhamento, a empresa já mudou as rotas de seus caminhões.</p>
+  <h3>2.5 Transformar o medo em dados, e os dados em poder</h3>
+  <p>O medo paralisa. O dado empodera. A hiperconectividade transforma o medo em uma planilha, e os dados, cruzados com outras variáveis, geram <strong>poder de decisão</strong>: permanecer com protocolos, realocar-se estrategicamente, investir com conhecimento ou partir com um plano.</p>
+</article>
+<article class="chapter" id="cap3">
+  <div class="chapter-header"><div class="chapter-number">Capítulo 03</div><div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">📍</span><h2 class="chapter-title">O Radar Local: o microclima da insegurança</h2></div><p class="chapter-lead">Crime, clima, saúde e política de proximidade.</p></div>
+  <h3>3.1 Ocorrências policiais e crimes: indicadores precoces</h3>
+  <p>O radar local começa pelo que é mais visível: <strong>o crime cotidiano</strong>, aquele que degrada a vida e gera terror silencioso.</p>
+  <ul><li>Assaltos a funcionários nos trajetos de ida e volta do trabalho.</li><li>Invasões a residências de funcionários em posições-chave.</li><li>Roubo de cargas e de valores em trânsito.</li><li>Extorsões disfarçadas de “pedágio” ou cobrança de proteção.</li><li><strong>Crimes de baixo impacto que se repetem</strong>: indicadores precoces do colapso.</li><li><strong>Áreas sem controle estatal</strong>: regiões onde o Estado perdeu o monopólio do uso da força.</li></ul>
+  <h3>3.2 Fenômenos climáticos extremos</h3>
+  <p>O clima não é um problema “ambiental”. É um <strong>multiplicador de riscos operacionais</strong>. Uma inundação interrompe o acesso à fábrica. Uma onda de calor incapacita 40% da equipe. Uma tempestade severa corta a energia e interrompe a cadeia de frio.</p>
+  <h3>3.3 Surtos de saúde e doenças emergentes</h3>
+  <p>Dengue, leptospirose após enchentes, surtos gastrointestinais: a saúde pública é um <strong>indicador da qualidade do ambiente</strong>.</p>
+  <h3>3.4 A política de proximidade</h3>
+  <p>Corrupção municipal, leis locais em análise, pressão tributária abusiva, obras públicas que bloqueiam o acesso. Tudo isso é registrado, projetado e transformado em <strong>subsídio para a decisão</strong>.</p>
+  <h3>3.5 Protocolos de cuidado</h3>
+  <p>Com o radar local em funcionamento, a empresa cria protocolos para sua equipe:</p>
+  <ul><li>Transporte corporativo para áreas escuras ou de alto risco.</li><li>Horários escalonados.</li><li>Proteção das instalações conforme o nível de risco.</li><li><strong>Protocolo de não resistência</strong>: a vida vale mais que a mercadoria.</li><li>Botão de pânico e treinamento em autoproteção.</li></ul>
+</article>
+<article class="chapter" id="cap4">
+  <div class="chapter-header"><div class="chapter-number">Capítulo 04</div><div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🏛️</span><h2 class="chapter-title">O Radar Nacional: identificando refúgios seguros</h2></div><p class="chapter-lead">Rankings, leis e cidades-refúgio.</p></div>
+  <h3>4.1 Rankings de segurança e Estado de Direito</h3>
+  <p>Se o radar local indica que a cidade é um campo de batalha, o radar nacional procura <strong>onde estão os refúgios</strong>: rankings estaduais de segurança, índices de Estado de Direito, rankings de facilidade para fazer negócios.</p>
+  <h3>4.2 Tensões geopolíticas internas</h3>
+  <p>Estados que competem por investimentos, conflitos entre jurisdições por recursos, mudanças de governo estadual. A empresa monitora a migração de capitais e os incentivos fiscais regionais.</p>
+  <h3>4.3 Projetos de leis nacionais em análise</h3>
+  <p>Projetos que podem afetar as regras trabalhistas, tributárias, de importação e exportação ou de preços. A empresa não espera a aprovação da lei. <strong>Projeta cenários</strong>.</p>
+  <h3>4.4 Cadeias de suprimentos</h3>
+  <p>Vulnerabilidades, rotas alternativas, fornecedores alternativos, estoque de segurança. Quantos dias de autonomia eu tenho?</p>
+  <h3>4.5 Cidades-refúgio</h3>
+  <p>Lugares para onde a empresa poderia se realocar se a situação local se tornasse insustentável. Critérios: segurança física, estabilidade jurídica, infraestrutura, mercado de trabalho, custos e incentivos.</p>
+  <div class="callout info"><div class="callout-title">Princípio fundamental</div><p>A empresa não espera precisar de uma cidade-refúgio. <strong>Ela já a identificou, estimou os custos, estabeleceu contatos preliminares e preparou um plano de transição.</strong> Porque, quando o IVR entra na faixa vermelha, não há tempo para procurar.</p></div>
+</article>
+<article class="chapter" id="cap5">
+  <div class="chapter-header"><div class="chapter-number">Capítulo 05</div><div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🌐</span><h2 class="chapter-title">O Radar Global: o macroclima da estabilidade</h2></div><p class="chapter-lead">Geopolítica, cadeias de suprimentos e eventos globais.</p></div>
+  <h3>5.1 Tensões geopolíticas internacionais</h3>
+  <p>Uma guerra na Europa afeta o preço da energia na América do Sul. Uma sanção a um país asiático afeta a cadeia de insumos. O mundo é um sistema interconectado.</p>
+  <h3>5.2 Conflitos em rotas marítimas</h3>
+  <p>Mar Vermelho, Estreito de Ormuz, Canal de Suez, Canal do Panamá: <strong>qualquer interrupção afeta a empresa local</strong>. Ataques a navios, fechamento de canais, greves portuárias, fretes internacionais.</p>
+  <h3>5.3 Fenômenos climáticos globais</h3>
+  <p>Um El Niño intenso afeta as colheitas em três continentes. Um furacão no Caribe paralisa refinarias. Uma seca na China afeta os componentes eletrônicos.</p>
+  <h3>5.4 Sanções e volatilidade</h3>
+  <p>Volatilidade cambial, risco-país, sanções setoriais, ciclos econômicos globais.</p>
+  <h3>5.5 Mapeamento de oportunidades</h3>
+  <p>O radar global não observa apenas ameaças. Também <strong>mapeia oportunidades</strong>: países estáveis, regiões em crescimento, mercados emergentes, acordos de livre-comércio.</p>
+</article>
+<article class="chapter" id="cap6">
+  <div class="chapter-header"><div class="chapter-number">Capítulo 06</div><div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">📊</span><h2 class="chapter-title">O algoritmo da realidade: o Índice de Viabilidade e Risco</h2></div><p class="chapter-lead">O semáforo corporativo que decide o futuro.</p></div>
+  <h3>6.1 Elaboração do IVR</h3>
+  <p>Todas as informações do radar local, nacional e global devem ser traduzidas em um <strong>número</strong>: o <strong>Índice de Viabilidade e Risco (IVR)</strong>. Um painel de controle que pondera variáveis semanais.</p>
+  <h3>6.2 Componentes do IVR</h3>
+  <table><thead><tr><th>Componente</th><th>Peso</th><th>Variáveis</th></tr></thead><tbody>
+  <tr><td><strong>Segurança física</strong></td><td>40%</td><td>Crimes violentos, homicídios, sensação de insegurança, tempo de resposta policial</td></tr>
+  <tr><td><strong>Estabilidade jurídica</strong></td><td>25%</td><td>Corrupção, leis desfavoráveis, pressão tributária, velocidade da Justiça</td></tr>
+  <tr><td><strong>Continuidade operacional</strong></td><td>20%</td><td>Interrupções de serviços, clima extremo, surtos, rotas, insumos</td></tr>
+  <tr><td><strong>Ambiente macroeconômico</strong></td><td>15%</td><td>Cadeias de suprimentos, inflação, volatilidade, geopolítica</td></tr>
+  </tbody></table>
+  <figure class="ivr-chart" id="ivr-chart" aria-labelledby="ivr-chart-title">
+    <h4 id="ivr-chart-title">Pesos dos componentes do IVR</h4>
+    <ul role="img" aria-label="Pesos dos componentes do IVR">
+      <li><span>Segurança física</span><span class="ivr-track"><span class="ivr-bar" style="--weight:100%"></span></span><span class="ivr-value">40%</span></li>
+      <li><span>Estabilidade jurídica</span><span class="ivr-track"><span class="ivr-bar" style="--weight:62.5%"></span></span><span class="ivr-value">25%</span></li>
+      <li><span>Continuidade operacional</span><span class="ivr-track"><span class="ivr-bar" style="--weight:50%"></span></span><span class="ivr-value">20%</span></li>
+      <li><span>Ambiente macroeconômico</span><span class="ivr-track"><span class="ivr-bar" style="--weight:37.5%"></span></span><span class="ivr-value">15%</span></li>
+    </ul>
+    <figcaption class="chapter-lead">Pesos de referência descritos no modelo; não representam uma medição em tempo real.</figcaption>
+  </figure>
+  <h3>6.3 O semáforo corporativo</h3>
+  <div class="semaforo">
+    <div class="semaforo-item verde"><div class="luz"></div><h5>Verde · 70–100</h5><p>Ambiente viável. Operar, investir, expandir. Protocolos padrão.</p></div>
+    <div class="semaforo-item amarillo"><div class="luz"></div><h5>Amarelo · 40–69</h5><p>Ambiente em deterioração. Ativar protocolos de cuidado extremo. Preparar plano de saída.</p></div>
+    <div class="semaforo-item rojo"><div class="luz"></div><h5>Vermelho · 0–39</h5><p>Ambiente inviável. <strong>Executar o protocolo de êxodo.</strong></p></div>
+  </div>
+  <h3>6.4 Limiares de decisão</h3>
+  <ul><li><strong>IVR 70→60:</strong> revisão dos protocolos.</li><li><strong>IVR 60→50:</strong> cuidado extremo.</li><li><strong>IVR 50→40:</strong> contingência territorial.</li><li><strong>IVR 40→30:</strong> busca ativa por cidades-refúgio.</li><li><strong>IVR 30→20:</strong> plano de realocação.</li><li><strong>IVR &lt;20:</strong> êxodo imediato.</li></ul>
+  <h3>6.5 O IVR como organismo vivo</h3>
+  <p>Ele é atualizado com a frequência exigida pela realidade: diariamente (incidentes, clima), semanalmente (política, leis), mensalmente (rankings, geopolítica), trimestralmente (revisão integral).</p>
+</article>
+<article class="chapter" id="cap7">
+  <div class="chapter-header"><div class="chapter-number">Capítulo 07</div><div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🛡️</span><h2 class="chapter-title">O dever de cuidado: a empresa como protetora</h2></div><p class="chapter-lead">A equipe, os protocolos e a lealdade.</p></div>
+  <h3>7.1 O vazio deixado pelo Estado</h3>
+  <p>Quando o Estado falha em seu mandato básico de segurança, <strong>o vazio é preenchido pelas organizações que têm recursos, capacidade operacional e responsabilidade pelas pessoas</strong>. A empresa assume o dever de cuidar de sua equipe.</p>
+  <h3>7.2 Segurança integral como benefício supremo</h3>
+  <p>Em um ambiente hostil, o salário perde valor diante da segurança. Um funcionário prefere ganhar 15% menos e saber que a empresa o protege.</p>
+  <h3>7.3 Protocolos por público</h3>
+  <h4>Para funcionários</h4><p>Rotas seguras, horários escalonados, comunicação 24 horas por dia, 7 dias por semana, treinamento, seguro ampliado.</p>
+  <h4>Para clientes</h4><p>Estacionamento vigiado, equipe treinada, protocolos de evacuação.</p>
+  <h4>Para fornecedores</h4><p>Janelas de horário seguras, pontos de encontro vigiados, contingência logística.</p>
+  <h3>7.4 A lealdade como retorno</h3>
+  <p>Uma empresa que protege sua equipe gera <strong>lealdade, retenção de talentos, produtividade e reputação</strong>.</p>
+  <h3>7.5 Ética empresarial</h3>
+  <div class="callout warning"><div class="callout-title">Regra inegociável</div><p><strong>Nenhuma vida vale menos que um patrimônio.</strong> Em caso de roubo: não resistir. Diante de uma ameaça: evacuar. Diante de um risco extremo: ir embora. O patrimônio pode ser recuperado. A vida, não.</p></div>
+</article>
+<article class="chapter" id="cap8">
+  <div class="chapter-header"><div class="chapter-number">Capítulo 08</div><div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🧭</span><h2 class="chapter-title">A sanção definitiva: a realocação como voto com os pés</h2></div><p class="chapter-lead">A mensagem ao Estado falido.</p></div>
+  <h3>8.1 O protocolo de êxodo</h3>
+  <p>Quando o IVR permanece na faixa vermelha por mais de 60 dias, ou um evento extremo o derruba para menos de 20, o protocolo é acionado. Não é uma fuga. É uma <strong>realocação estratégica</strong>: cidade-refúgio, incentivos, transferência de ativos, comunicação, continuidade operacional.</p>
+  <h3>8.2 A empresa como motor econômico</h3>
+  <p>A empresa gera empregos, paga impostos, compra de fornecedores locais, atrai consumo. Quando vai embora, leva tudo isso consigo. A cidade entra em um <strong>círculo vicioso</strong>.</p>
+  <h3>8.3 Realocação estratégica</h3>
+  <p>A empresa que vai embora em pânico perde. A empresa que parte com um plano <strong>ganha duas vezes</strong>: deixa um ambiente inviável e chega a um ambiente viável com a vantagem da antecipação.</p>
+  <h3>8.4 A mensagem à classe política</h3>
+  <blockquote>Se não conseguem garantir a segurança das famílias, a paz social e o Estado de Direito, ficarão sozinhos governando a ruína.</blockquote>
+  <h3>8.5 Estudos de caso</h3>
+  <p>A história está repleta de empresas que deixaram cidades dominadas pelo narcotráfico e países em colapso institucional, e prosperaram ao antecipar tendências. Não são anedotas. São <strong>evidências de que a realocação estratégica é uma ferramenta de sobrevivência comprovada</strong>.</p>
+</article>
+<article class="chapter" id="cap9">
+  <div class="chapter-header"><div class="chapter-number">Capítulo 09</div><div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">🧰</span><h2 class="chapter-title">Implementação prática: construindo seu Radar</h2></div><p class="chapter-lead">Ferramentas, rede de observadores e capacitação.</p></div>
+  <h3>9.1 Ferramentas de baixo custo</h3>
+  <ul><li><strong>Google Alerts</strong> com palavras-chave locais.</li><li><strong>Feed RSS</strong> de veículos de imprensa locais e policiais.</li><li><strong>Grupos de WhatsApp</strong> de bairro e do setor.</li><li><strong>Listas do Twitter/X</strong> com jornalistas e autoridades.</li><li><strong>Plataformas de coleta automatizada</strong> ou desenvolvimento interno com Python.</li><li><strong>Painéis gratuitos</strong>: Google Data Studio, Power BI.</li><li><strong>APIs públicas</strong>: meteorologia, transporte, fontes oficiais.</li></ul>
+  <h3>9.2 A rede de observadores</h3>
+  <p>Funcionários, fornecedores e moradores atuam como sensores. Canal interno para relatos. Moradores e associações comerciais como aliados. A rede precisa ser <strong>capacitada</strong>: o que observar, como relatar, quais dados são relevantes.</p>
+  <h3>9.3 Coleta de notícias e redes sociais</h3>
+  <p>Extração automática de informações de fontes públicas: notícias locais, redes sociais, fontes oficiais, rádios policiais. Tudo centralizado em um <strong>painel</strong> que apresenta tendências e alertas.</p>
+  <h3>9.4 Integração de dados</h3>
+  <p>Banco de dados central, APIs, painéis, alertas automáticos quando um indicador ultrapassa um limiar.</p>
+  <h3>9.5 Capacitação da equipe</h3>
+  <p>Tecnologia sem capacitação é inútil. A empresa precisa ensinar sua equipe a:</p>
+  <ul><li><strong>Observar:</strong> o que observar, como detectar sinais fracos.</li><li><strong>Registrar:</strong> formato, frequência e evidências.</li><li><strong>Cruzar:</strong> como conectar dados dispersos.</li><li><strong>Pensar:</strong> formular hipóteses, identificar padrões.</li><li><strong>Projetar:</strong> o que acontecerá se a tendência continuar.</li><li><strong>Criar protocolos:</strong> transformar a análise em ação.</li><li><strong>Comunicar:</strong> traduzir os dados para a linguagem de quem decide.</li></ul>
+  <div class="callout success"><div class="callout-title">Cultura, não curso</div><p>Essa capacitação não é um curso. É uma <strong>cultura</strong>. A empresa hiperconectada é uma empresa que pensa.</p></div>
+</article>
+<article class="chapter" id="cap10">
+  <div class="chapter-header"><div class="chapter-number">Capítulo 10</div><div class="chapter-heading-row"><span class="chapter-icon" aria-hidden="true">✨</span><h2 class="chapter-title">Conclusão: o poder de decidir e a tragédia do absurdo</h2></div><p class="chapter-lead">Onde não há segurança, não há futuro.</p></div>
+  <h3>10.1 As empresas como únicas entidades com mobilidade estratégica</h3>
+  <p>Os cidadãos comuns, os trabalhadores honestos, as famílias que buscam progredir estão <strong>presos</strong>. Não têm mobilidade de capital, flexibilidade estrutural nem recursos para emigrar de um dia para o outro. <strong>Mas as empresas têm.</strong></p>
+  <h3>10.2 A responsabilidade política</h3>
+  <p>Quando uma cidade entra em colapso, quando os crimes se multiplicam, quando as famílias são arruinadas, <strong>há responsáveis</strong>. Os políticos que negam a realidade, os que “enrolam” com mesas de diálogo e cúpulas sem executar nada, são <strong>cúmplices</strong>. Cúmplices de cada vida inocente interrompida, de cada família arruinada, de cada talento que emigrou.</p>
+  <h3>10.3 Nenhum funcionário quer uma tragédia por causa de um tênis</h3>
+  <blockquote>Nenhum funcionário quer passar por uma tragédia para que roubem seu tênis.</blockquote>
+  <p>Nenhum cliente quer sofrer um trauma ao comprar um produto. Nenhum fornecedor quer arriscar a vida para entregar uma mercadoria. A vida humana e a paz de espírito <strong>não são sacrifícios aceitáveis</strong> no caminho da produção.</p>
+  <h3>10.4 O manifesto final</h3>
+  <div class="callout warning"><div class="callout-title">Manifesto</div><p><strong>Onde não há segurança, não há futuro.</strong></p><p>Onde o Estado falhou, a empresa precisa assumir sua responsabilidade. Onde a política mentiu, os dados devem falar. Onde o medo paralisou, a inteligência deve decidir.</p></div>
+  <h3>10.5 A empresa hiperconectada escolhe o futuro</h3>
+  <p>A empresa hiperconectada não fica esperando o desastre. Registra, analisa, protege as pessoas que trabalham com ela e, se necessário, <strong>fecha as portas e se muda para um lugar onde o trabalho e a vida voltem a estar acima do medo</strong>.</p>
+  <p>Porque a empresa, por sobrevivência e por ética, precisa escolher o futuro.</p>
+  <p>E esse futuro não se constrói com discursos. Constrói-se com dados, protocolos e decisões. Constrói-se com a coragem de registrar o que está acontecendo, pensar sobre isso sem filtros e agir antes que seja tarde.</p>
+  <p style="text-align:center;font-size:1.3rem;font-style:italic;color:var(--accent);margin-top:3rem"><strong>Quanto mais pares de olhos estiverem registrando os acontecimentos, melhor a empresa poderá tomar decisões antes que seja tarde.</strong></p>
+  <p style="text-align:center;color:var(--muted)">Essa é a promessa da hiperconectividade.<br>Essa é a responsabilidade da empresa moderna.<br>Essa é a única forma de fazer com que a vida, o trabalho e a dignidade voltem a estar acima do medo.</p>
+</article>
+</main>
+<a href="#indice" class="back-top" title="Voltar ao sumário" aria-label="Voltar ao sumário">↑</a>
+<footer><p><strong>O Radar Corporativo</strong> · Edição 2026</p><p>Hiperconectividade, segurança e o novo imperativo de sobrevivência empresarial</p></footer>
+<script>
+  const languagePicker = document.querySelector("#language");
+  const searchInput = document.querySelector("#book-search");
+  const searchStatus = document.querySelector("#search-status");
+  let currentMatch = -1;
+
+  languagePicker.addEventListener("change", () => {
+    const editions = { es: "index.html", en: "index.en.html", "pt-BR": "index.pt-br.html" };
+    window.location.href = editions[languagePicker.value];
+  });
+
+  function fold(value) {
+    return value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase("pt-BR");
+  }
+
+  function clearSearchMarks() {
+    document.querySelectorAll("mark.search-match").forEach((mark) => {
+      mark.replaceWith(document.createTextNode(mark.textContent));
+    });
+  }
+
+  function refreshSearch() {
+    clearSearchMarks();
+    currentMatch = -1;
+    const query = fold(searchInput.value.trim());
+    if (!query) {
+      searchStatus.textContent = "";
+      return;
+    }
+    const root = document.querySelector("main");
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.parentElement.closest("script, style, mark, .chapter-icon")
+          ? NodeFilter.FILTER_REJECT
+          : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    const matches = [];
+    textNodes.forEach((node) => {
+      const text = node.nodeValue;
+      const foldedCharacters = [];
+      const originalStarts = [];
+      const originalEnds = [];
+      let originalIndex = 0;
+      for (const character of text) {
+        const normalized = fold(character);
+        for (const foldedCharacter of normalized) {
+          for (let offset = 0; offset < foldedCharacter.length; offset += 1) {
+            foldedCharacters.push(foldedCharacter[offset]);
+            originalStarts.push(originalIndex);
+            originalEnds.push(originalIndex + character.length);
+          }
+        }
+        originalIndex += character.length;
+      }
+      const foldedText = foldedCharacters.join("");
+      const fragments = document.createDocumentFragment();
+      let cursor = 0;
+      let matchIndex = foldedText.indexOf(query);
+      let foundHere = false;
+      while (matchIndex !== -1) {
+        const start = originalStarts[matchIndex];
+        const end = originalEnds[matchIndex + query.length - 1];
+        if (start >= cursor && end !== undefined) {
+          fragments.append(document.createTextNode(text.slice(cursor, start)));
+          const mark = document.createElement("mark");
+          mark.className = "search-match";
+          mark.textContent = text.slice(start, end);
+          fragments.append(mark);
+          matches.push(mark);
+          cursor = end;
+          foundHere = true;
+        }
+        matchIndex = foldedText.indexOf(query, matchIndex + query.length);
+      }
+      if (foundHere) {
+        fragments.append(document.createTextNode(text.slice(cursor)));
+        node.replaceWith(fragments);
+      }
+    });
+    if (matches.length) {
+      searchStatus.textContent = `${matches.length} ${matches.length === 1 ? "resultado" : "resultados"}.`;
+      matches[0].classList.add("current");
+      currentMatch = 0;
+    } else {
+      searchStatus.textContent = "Nenhum resultado encontrado.";
+    }
+  }
+
+  searchInput.addEventListener("input", refreshSearch);
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      searchInput.value = "";
+      refreshSearch();
+    } else if (event.key === "Enter") {
+      const matches = document.querySelectorAll("mark.search-match");
+      if (matches.length) {
+        matches[currentMatch]?.classList.remove("current");
+        currentMatch = (currentMatch + 1) % matches.length;
+        matches[currentMatch].classList.add("current");
+        matches[currentMatch].scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "center"
+        });
+      }
+    }
+  });
+
+  const chart = document.querySelector("#ivr-chart");
+  if ("IntersectionObserver" in window) {
+    const chartObserver = new IntersectionObserver((entries, observer) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        chart.classList.add("is-visible");
+        observer.disconnect();
+      }
+    }, { threshold: 0.25 });
+    chartObserver.observe(chart);
+  } else {
+    chart.classList.add("is-visible");
+  }
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js")
+      .catch((error) => console.error("Não foi possível registrar o service worker:", error));
+  }
+
+  let installPrompt;
+  const installButton = document.querySelector("#install-app");
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    installPrompt = event;
+    installButton.hidden = false;
+  });
+  installButton.addEventListener("click", async () => {
+    if (!installPrompt) return;
+    try {
+      await installPrompt.prompt();
+    } catch (error) {
+      console.error("Não foi possível iniciar a instalação do aplicativo:", error);
+    } finally {
+      installPrompt = null;
+      installButton.hidden = true;
+    }
+  });
+  window.addEventListener("appinstalled", () => {
+    installButton.hidden = true;
+    installPrompt = null;
+  });
+</script>
+</body>
+</html>

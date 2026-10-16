@@ -1,0 +1,19 @@
+{
+  "name": "El Radar Corporativo",
+  "short_name": "Radar",
+  "description": "Guía multilingüe de hiperconectividad, seguridad e inteligencia de riesgos empresariales.",
+  "lang": "es",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#faf8f3",
+  "theme_color": "#241b18",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
